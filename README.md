@@ -21,10 +21,6 @@
 
 ## Useful git commands
 
-### Pulling latest changes
-
-`git pull`
-
 ### Creating new branch
 To create a new branch and switch to it at the same time
 
