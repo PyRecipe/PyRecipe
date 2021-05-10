@@ -8,3 +8,11 @@ class User(models.Model):
     confirmed_at = models.DateTimeField()
     updated_at = models.DateTimeField()
     created_at = models.DateTimeField()
+
+class Comment(models.Model):
+    recipe_id = models.CharField(max_length=30)
+    user_id = models.CharField(max_length=30)
+    comment = models.CharField(max_length=500)
+    created_at = models.DateTimeField()
+    
+
