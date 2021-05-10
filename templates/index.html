@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <!-- welcome-hero -->
+    {% include 'components/welcome-hero.html' %}
+    <!-- /welcome-hero -->
+
+    <!-- newly-added -->
+    <section class="my-5">
+        <div class="container">
+            <h3>En Son Eklenenler</h3>
+            <div class="splide">
+                <div class="splide__track">
+                    <ul class="splide__list">
+                        <li class="splide__slide">
+                            <!-- img will be fixed after creating global css file -->
+                            <img class="img-fluid rounded shadow" src="https://images.unsplash.com/photo-1484723091739-30a097e8f929?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=687&q=80" />
+                            <h4 class="mt-2">Recipe_Title</h4>
+                            <a href="#">author_username</a> 
+                        </li>
+                    </ul>
+                </div>
+            </div>
+    </section>
+    <!-- /newly-added -->
+{% endblock %}
+
+{% block scripts %}
+    <script>
+        document.addEventListener( 'DOMContentLoaded', function () {
+            new Splide( '.splide', {
+                type   : 'loop',
+                perPage: 4,
+                perMove: 1,
+                gap    : '10px',
+            } ).mount();
+        } );
+    </script>
+{% endblock %}
