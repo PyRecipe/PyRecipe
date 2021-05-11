@@ -25,12 +25,12 @@
 
     </style>
 </head>
-<body>
+<body class="d-flex flex-column min-vh-100">
     <!-- menu -->
     {% include 'components/menu.html' %}
     <!-- /menu -->
 
-    <main>
+    <main class="flex-fill">
         {% block content %}{% endblock %}
     </main>
 
