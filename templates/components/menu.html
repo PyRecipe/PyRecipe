@@ -1,0 +1,38 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container my-4">
+        <a class="navbar-brand" href="#">PyRecipe</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button> 
+        <div class="collapse navbar-collapse" id="navbarText">
+            <div class="m-auto w-50">
+                <input type="text" class="form-control" placeholder="Malzeme, Tarif veya Kullanıcı ara..." />
+            </div>
+            <ul class="navbar-nav mb-2 mb-lg-0">
+                {% if True %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><img src="static/plus.svg" /> Yeni</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Tariflerim</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" id="navbarProfileDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" href="#"><img src="static/user.svg" /></a>
+                        <ul class="dropdown-menu dropdown-menu-lg-end" aria-labelledby="navbarProfileDropdown">
+                            <li><a class="dropdown-item" href="#">Hesabım</a></li>
+                            <li><a class="dropdown-item" href="#">Ayarlar</a></li>
+                            <li><a class="dropdown-item" href="#">Çıkış Yap</a></li>
+                        </ul>
+                    </li>
+                {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Giriş Yap</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Kayıt Ol</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</nav>
