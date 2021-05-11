@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <!-- settings -->
+    <section class="my-5">
+        <div class="container">
+
+            <div class="mx-auto w-50">
+                <h2>Ayarlar</h2>
+                <form class="mt-4">
+
+                    <!-- form-name -->
+                    <div class="row">
+                        <div class="col">
+                            <label class="mb-1">Ad</label>
+                            <input type="text" class="form-control" placeholder="Ad" aria-label="Ad" />
+                        </div>
+                        <div class="col">
+                            <label class="mb-1">Soyad</label>
+                            <input type="text" class="form-control" placeholder="Soyad" aria-label="Soyad" />
+                        </div>
+                    </div>
+                    <!-- /form-name -->
+
+                    <!-- form-email -->
+                    <div class="mt-3">
+                        <label class="mb-1">E-posta</label>
+                        <input type="email" class="form-control" placeholder="E-posta" aria-label="E-posta" />
+                    </div>
+                    <!-- /form-email -->
+
+                    <!-- form-password -->
+                    <div class="mt-3">
+                        <label class="mb-1">Yeni Şifre</label>
+                        <input type="password" class="form-control" placeholder="Şifre" aria-label="Şifre" />
+                    </div>
+                    <!-- /form-password -->
+
+                    <!-- form-password-repeat -->
+                    <div class="mt-3">
+                        <label class="mb-1">Yeni Şifre Tekrarı</label>
+                        <input type="password" class="form-control" placeholder="Şifre tekrarı" aria-label="Şifre tekrarı" />
+                    </div>
+                    <!-- /form-password-repeat -->
+
+                    <button class="btn btn-primary mt-4" type="submit">Kaydet</button>
+
+                </form>
+            </div>
+        </div>
+    </section>
+    <!-- /settings -->
+
+{% endblock %}
