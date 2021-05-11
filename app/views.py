@@ -7,3 +7,7 @@ def index(request):
 # settings
 def settings(request):
     return render(request, 'settings.html')
+
+# login
+def login(request):
+    return render(request, 'login.html')
