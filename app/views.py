@@ -12,6 +12,10 @@ def settings(request):
 def login(request):
     return render(request, 'login.html')
 
+# signup
+def signup(request):
+    return render(request, 'signup.html')
+
 # searching
 def searching(request):
     return render(request, 'searching.html')
