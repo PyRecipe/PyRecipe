@@ -7,5 +7,6 @@ urlpatterns = [
     path('', views.index, name='index'),
     path('ayarlar', views.settings, name='settings'),
     path('giris', views.login, name='login'),
+    path('kayit', views.signup, name='signup'),
     path('ara', views.searching, name='searching'),
 ]
