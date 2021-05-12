@@ -19,3 +19,7 @@ def signup(request):
 # searching
 def searching(request):
     return render(request, 'searching.html')
+
+# search-listing
+def searchListing(request):
+    return render(request, 'search-listing.html')
