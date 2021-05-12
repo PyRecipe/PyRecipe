@@ -11,3 +11,7 @@ def settings(request):
 # login
 def login(request):
     return render(request, 'login.html')
+
+# searching
+def searching(request):
+    return render(request, 'searching.html')
