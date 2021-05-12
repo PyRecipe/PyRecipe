@@ -8,11 +8,13 @@
   <h4 class="mt-4"> Aranacak Tarif Bilgileri</h4>
   <br>
   <div class="mb-3">
+    <!-- form Recipe name-->
     <label class="form-label ">Tarif Adı</label>
     <input id = "recipe_name" class="form-control shadow" placeholder="Opsiyonel">
   
   </div>
 
+  <!-- form recipe components-->
   <form class="mb-3 w-25 mx-auto" >
   <label class="form-label mt-3">Malzemelerim</label>
   
@@ -44,13 +46,14 @@
     <option value="e4-3">Three</option>
     
   </select>
+  <!-- add form button-->
   <div class="text-center">
-    <button type="submit" class="btn btn-success btn-sm"><img src="static/plus.svg" /></button>
+    <button id="add" class="btn btn-success btn-sm"><img src="static/plus.svg" /></button>
   </div>
-  
+
   <br>
-  
-  <button type="submit" class="btn btn-success w-25 mb-5">Ara</button>
+  <!-- search button -->
+  <button id="search" class="btn btn-success w-25 mb-5">Ara</button>
 
 </form>
 
