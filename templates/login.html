@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <section style="height: 68vh;" class="d-flex align-items-center justify-content-center container">
+        <form class="w-50">
+
+            <h2 class="text-start mb-4">Giriş Yap</h2>
+
+            <!-- form-username -->
+            <div class="form-floating bg-body rounded">
+                <input class="form-control" type="text" id="floatingUsername" placeholder="Kullanıcı adı ya da e-posta">
+                <label for="floatingUsername">Kullanıcı adı ya da e-posta</label>
+            </div>
+            <!-- /form-username -->
+
+            <!-- form-password -->
+            <div class="form-floating bg-body rounded">
+                <input class="form-control mt-1" type="password" id="floatingPassword" placeholder="Şifre">
+                <label for="floatingPassword">Şifre</label>  
+            </div>
+            <!-- /form-password -->
+
+            <!-- form-check -->
+            <div class="form-check form-switch mt-3">
+                <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" checked>
+                <label class="form-check-label" for="flexSwitchCheckChecked">Beni Hatırla</label>
+            </div>
+            <!-- /form-check -->
+
+            <!-- form-button -->
+            <div class="text-start mt-3">
+                <button type="button" class="btn btn-primary w-25">Giriş Yap</button>
+            </div>
+            <!-- /form-button -->
+
+        </form>
+    </section>
+
+
+{% endblock %}

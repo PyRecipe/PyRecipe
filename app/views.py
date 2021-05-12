@@ -8,6 +8,10 @@ def index(request):
 def settings(request):
     return render(request, 'settings.html')
 
+# login
+def login(request):
+    return render(request, 'login.html')
+
 # searching
 def searching(request):
     return render(request, 'searching.html')
