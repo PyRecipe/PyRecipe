@@ -23,3 +23,7 @@ def searching(request):
 # search-listing
 def searchListing(request):
     return render(request, 'search-listing.html')
+
+# editing
+def editing(request):
+    return render(request, 'editing.html')
