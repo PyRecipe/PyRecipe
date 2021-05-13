@@ -31,3 +31,7 @@ def editing(request):
 # adding
 def adding(request):
     return render(request, 'adding.html')
+
+# my_recipes
+def my_recipes(request):
+    return render(request, 'my_recipes.html')

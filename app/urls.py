@@ -12,4 +12,5 @@ urlpatterns = [
     path('arama-sonuclari', views.searchListing, name='search-listing'),
     path('duzenle', views.editing, name='editing'),
     path('ekle', views.adding, name='adding'),
+    path('tariflerim', views.my_recipes, name='my_recipes')
 ]
