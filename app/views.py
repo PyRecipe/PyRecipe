@@ -19,3 +19,7 @@ def signup(request):
 # searching
 def searching(request):
     return render(request, 'searching.html')
+
+# adding
+def adding(request):
+    return render(request, 'adding.html')
