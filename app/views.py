@@ -27,3 +27,7 @@ def searchListing(request):
 # editing
 def editing(request):
     return render(request, 'editing.html')
+
+# adding
+def adding(request):
+    return render(request, 'adding.html')
