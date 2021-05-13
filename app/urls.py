@@ -11,4 +11,5 @@ urlpatterns = [
     path('ara', views.searching, name='searching'),
     path('arama-sonuclari', views.searchListing, name='search-listing'),
     path('duzenle', views.editing, name='editing'),
+    path('ekle', views.adding, name='adding'),
 ]
