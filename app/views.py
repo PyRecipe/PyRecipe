@@ -11,3 +11,7 @@ def settings(request):
 # searching
 def searching(request):
     return render(request, 'searching.html')
+
+# listing
+def my_recipes(request):
+    return render(request, 'my_recipes.html')
