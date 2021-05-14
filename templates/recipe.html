@@ -1,0 +1,161 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    
+    <div class="w-75 mx-auto mt-5 mb-5 row">
+
+        <!-- recipe-head-->
+        <div class="text-center mb-2">
+            <h2>Tarif Başlığı</h2>
+
+            <!-- recipe-owner-->
+            <img class="mb-1" src="static/user.svg">
+            <label>Kullanıcı Adı</label>
+            <!-- /recipe-owner-->
+            
+            <!-- recipe-date-->
+            <img class="mb-1 ms-4" src="static/calendar.svg">
+            <label>{Yayınlanma Tarihi}</label>
+            <label>•</label>
+            <label>{Son Güncelleme Tarihi}</label>
+            <!-- /recipe-date-->
+        </div>
+
+        <img style="max-width: 65em;" class="rounded mx-auto" src="https://images.wallpaperscraft.com/image/pie_baking_recipe_173786_1600x900.jpg">
+        <!-- /recipe-head-->
+
+        <!-- recipe-cooking-time-->
+        <div class="text-center mt-4">
+            <h5 class="fw-bold">Hazırlık Süresi</h5>
+            <label>15dk</label>
+        </div>
+        <!-- /recipe-cooking-time-->
+
+        <!-- recipe-elements-->
+        <div class="mt-3">
+            <h5 class="fw-bold text-center">Malzemeler</h5>
+            <div class="d-flex justify-content-center">
+            <dl>
+                <li>Malzeme 1</li>
+                <li>Malzeme 2</li>
+                <li>Malzeme 3</li>
+            </dl>
+            </div>
+        </div>
+        <!-- recipe-elements-->
+
+        <!-- recipe-making-->
+        <div class="mt-3 w-75 mx-auto">
+            <h5 class="fw-bold text-center">Yapılışı</h5>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Pellentesque diam volutpat commodo sed egestas. Tempor commodo ullamcorper a lacus. Diam phasellus vestibulum lorem sed. Ullamcorper morbi tincidunt ornare massa eget. Nisl nunc mi ipsum faucibus vitae aliquet. Ullamcorper malesuada proin libero nunc consequat. Quis vel eros donec ac odio tempor orci. Sit amet aliquam id diam maecenas ultricies mi eget. Montes nascetur ridiculus mus mauris vitae ultricies leo integer malesuada. Quis varius quam quisque id diam vel. Lorem sed risus ultricies tristique nulla aliquet enim tortor at.
+                Iaculis nunc sed augue lacus viverra vitae. Dui accumsan sit amet nulla facilisi morbi tempus iaculis urna. Proin fermentum leo vel orci. Netus et malesuada fames ac turpis egestas. Risus feugiat in ante metus dictum at tempor commodo ullamcorper. Sapien nec sagittis aliquam malesuada bibendum arcu vitae elementum. Augue interdum velit euismod in pellentesque massa. Dictum non consectetur a erat nam at. Tristique nulla aliquet enim tortor at auctor urna nunc id. Eget mauris pharetra et ultrices neque ornare aenean euismod elementum. Eleifend mi in nulla posuere sollicitudin. Ultrices mi tempus imperdiet nulla malesuada pellentesque. Fusce ut placerat orci nulla pellentesque dignissim enim. Integer vitae justo eget magna fermentum iaculis eu non diam. Fermentum et sollicitudin ac orci phasellus egestas tellus rutrum.
+                Adipiscing elit duis tristique sollicitudin. Volutpat commodo sed egestas egestas. At imperdiet dui accumsan sit. Risus nec feugiat in fermentum posuere urna. At volutpat diam ut venenatis. Enim ut tellus elementum sagittis. Egestas pretium aenean pharetra magna ac. Cursus in hac habitasse platea dictumst quisque sagittis purus sit. At consectetur lorem donec massa sapien faucibus et. Amet porttitor eget dolor morbi non. Lectus vestibulum mattis ullamcorper velit sed ullamcorper morbi. Posuere urna nec tincidunt praesent semper. Quam quisque id diam vel quam elementum pulvinar etiam non. Nulla malesuada pellentesque elit eget gravida cum sociis. Elementum nisi quis eleifend quam adipiscing. Integer feugiat scelerisque varius morbi enim nunc faucibus a pellentesque.
+                Eu feugiat pretium nibh ipsum consequat. Libero enim sed faucibus turpis in eu mi bibendum. Ipsum dolor sit amet consectetur adipiscing elit ut. Vestibulum sed arcu non odio euismod lacinia at quis. Id cursus metus aliquam eleifend. Sagittis orci a scelerisque purus semper eget duis at tellus. Enim sit amet venenatis urna cursus eget nunc. Nunc sed augue lacus viverra vitae congue eu. Quis risus sed vulputate odio ut enim blandit. Mi in nulla posuere sollicitudin aliquam.
+                Massa placerat duis ultricies lacus sed turpis tincidunt id aliquet. Enim praesent elementum facilisis leo vel fringilla est ullamcorper eget. Fermentum posuere urna nec tincidunt. Elementum sagittis vitae et leo duis ut. Pellentesque sit amet porttitor eget dolor morbi non. Vel eros donec ac odio tempor orci dapibus ultrices. Duis ut diam quam nulla porttitor. Tortor consequat id porta nibh venenatis cras sed felis. Tristique senectus et netus et malesuada. Ut morbi tincidunt augue interdum velit euismod in pellentesque. Lobortis elementum nibh tellus molestie nunc non. Integer malesuada nunc vel risus. Mauris pellentesque pulvinar pellentesque habitant morbi tristique senectus.
+            </p>
+        </div>
+        <!-- /recipe-making-->
+
+        <!-- recipe-photos-->
+        <div class="container mt-4 w-75 mx-auto">
+            <div class="row">
+                <div class="col text-end">
+                    <img style="max-width: 30em;" class="rounded" src="https://images.wallpaperscraft.com/image/pie_baking_recipe_173786_1600x900.jpg">
+                </div>
+                <div class="col text-start">
+                    <img style="max-width: 30em;" class="rounded" src="https://images.wallpaperscraft.com/image/pie_baking_recipe_173786_1600x900.jpg">
+                </div>
+                <div class="mt-3 col text-end">
+                    <img style="max-width: 30em;" class="rounded" src="https://images.wallpaperscraft.com/image/pie_baking_recipe_173786_1600x900.jpg">
+                </div>
+                <div class="mt-3 col text-start">
+                    <img style="max-width: 30em;" class="rounded" src="https://images.wallpaperscraft.com/image/pie_baking_recipe_173786_1600x900.jpg">
+                </div>
+            </div>
+        </div>
+        <!-- /recipe-photos-->
+
+        <!-- recipe-comments-->
+        <div class="mt-5">
+            <div class="text-center">
+                <label class="fw-bolder fs-5">Yorumlar • </label>
+                <label class="fw-bolder fs-6">{Yorum Sayısı}</label>
+            </div>
+
+            <!-- comments -->
+            <div class="mt-3 w-75 mx-auto">
+
+                <!-- comment-first -->
+                <div class="row">
+                    <div class="col text-start">
+                        <img class="mb-1" src="static/user.svg">
+                        <label>Ad Soyad • </label>
+                        <label class="fst-italic">Kullanıcı Adı</label>
+                    </div>
+
+                    <div class="col text-end">
+                        <label class="fst-italic">created_at</label>
+                    </div>
+
+                    <div class="ms-3 me-3">
+                        <label>Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                            sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                            Enim eu turpis egestas pretium aenean pharetra magna ac.
+                            Rutrum quisque non tellus orci ac auctor. Ornare lectus sit amet est placerat.
+                            Quisque non tellus orci ac auctor augue mauris augue.
+                        </label>
+                    </div>
+                </div>
+                <!-- /comment-first -->
+                
+                <!-- comment-second -->
+                <div class="row mt-5">
+                    <div class="col text-start">
+                        <img class="mb-1" src="static/user.svg">
+                        <label>Ad Soyad • </label>
+                        <label class="fst-italic">Kullanıcı Adı</label>
+                    </div>
+
+                    <div class="col text-end">
+                        <label class="fst-italic">created_at</label>
+                    </div>
+
+                    <div class="ms-3 me-3">
+                        <label>Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                            sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                            Enim eu turpis egestas pretium aenean pharetra magna ac.
+                            Rutrum quisque non tellus orci ac auctor. Ornare lectus sit amet est placerat.
+                            Quisque non tellus orci ac auctor augue mauris augue.
+                        </label>
+                    </div>
+                </div>
+                <!-- /comment-second -->
+            </div>
+            <!-- /comments -->
+           
+            <!-- form-comment -->
+            <div class="mt-5 w-75 text-center mx-auto">
+                <h5 class="fw-bold">Bir Yorum Yazın</h5>
+
+                <!-- form-textarea -->
+                <div class="form-floating">
+                    <textarea type="text" style="height: 100px" class="form-control" placeholder="Tarif hakkında fikriniz, yorumunuzu paylaşın."></textarea>
+                    <label class="text-muted">Tarif hakkında fikriniz, yorumunuzu paylaşın.</label>
+                </div>
+                <!-- /form-textarea -->
+
+                <!-- form-button -->
+                <div class="text-start mt-1">
+                    <button type="button" class="btn btn-primary btn-sm">Yorumu Gönder</button>
+                </div>
+                <!-- /form-button -->
+                
+            </div>
+            <!-- /form-comment -->
+
+        </div>
+        <!-- recipe-comments-->
+
+    </div>
+
+{% endblock %}

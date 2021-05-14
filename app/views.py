@@ -35,3 +35,7 @@ def adding(request):
 # my_recipes
 def my_recipes(request):
     return render(request, 'my_recipes.html')
+
+# recipe
+def recipe(request):
+    return render(request, 'recipe.html')
