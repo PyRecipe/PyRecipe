@@ -39,3 +39,7 @@ class Recipe(models.Model):
     def images_arr(self):
         """Returns images as an array"""
         return self.images.split(',')
+
+    def components_arr(self):
+        """Returns components as an array"""
+        return self.components.split(',')

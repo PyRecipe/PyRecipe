@@ -9,12 +9,12 @@
             <h2>{{ recipe.title }}</h2>
 
             <!-- recipe-owner-->
-            <img class="mb-1" src="static/user.svg">
-            <label>Kullanıcı Adı</label>
+            <img class="mb-1" src="{{ request.host_url }}/static/user.svg">
+            <label>{{ recipe.author }}</label>
             <!-- /recipe-owner-->
             
             <!-- recipe-date-->
-            <img class="mb-1 ms-4" src="static/calendar.svg">
+            <img class="mb-1 ms-4" src="{{ request.host_url }}/static/calendar.svg">
             <label>{{ recipe.created_at }}</label>
             <!-- /recipe-date-->
         </div>
@@ -34,9 +34,9 @@
             <h5 class="fw-bold text-center">Malzemeler</h5>
             <div class="d-flex justify-content-center">
             <dl>
-                <li>Malzeme 1</li>
-                <li>Malzeme 2</li>
-                <li>Malzeme 3</li>
+                {% for component in recipe.components_arr %}
+                    <li>{{ component }}</li>
+                {% endfor %}
             </dl>
             </div>
         </div>
