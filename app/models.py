@@ -30,3 +30,7 @@ class Recipe(models.Model):
     # If object called without a parameter
     def __str__(self):
         return self.title
+
+    def images_arr(self):
+        """Returns images as an array"""
+        return self.images.split(',')

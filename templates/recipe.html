@@ -52,18 +52,11 @@
         <!-- recipe-photos-->
         <div class="container mt-4 w-75 mx-auto">
             <div class="row">
-                <div class="col text-end">
-                    <img style="max-width: 30em;" class="rounded" src="https://images.wallpaperscraft.com/image/pie_baking_recipe_173786_1600x900.jpg">
-                </div>
-                <div class="col text-start">
-                    <img style="max-width: 30em;" class="rounded" src="https://images.wallpaperscraft.com/image/pie_baking_recipe_173786_1600x900.jpg">
-                </div>
-                <div class="mt-3 col text-end">
-                    <img style="max-width: 30em;" class="rounded" src="https://images.wallpaperscraft.com/image/pie_baking_recipe_173786_1600x900.jpg">
-                </div>
-                <div class="mt-3 col text-start">
-                    <img style="max-width: 30em;" class="rounded" src="https://images.wallpaperscraft.com/image/pie_baking_recipe_173786_1600x900.jpg">
-                </div>
+                {% for recipe_image in recipe.images_arr %}
+                    <div class="col-lg-6">
+                        <img class="img-fluid rounded" src="{{ request.host_url }}/static/{{ recipe_image }}">
+                    </div>
+                {% endfor %}
             </div>
         </div>
         <!-- /recipe-photos-->
