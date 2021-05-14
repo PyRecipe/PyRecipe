@@ -10,6 +10,10 @@ class User(models.Model):
     updated_at = models.DateTimeField(default=timezone.now())
     created_at = models.DateTimeField(default=timezone.now())
 
+    # If object called without a parameter
+    def __str__(self):
+        return self.username
+
 class Comment(models.Model):
     recipe_id = models.CharField(max_length=30)
     user_id = models.CharField(max_length=30)
@@ -23,6 +27,7 @@ class Recipe(models.Model):
     images = models.TextField(max_length=500, null=True)
     components = models.TextField(max_length=500, null=True)
     state = models.IntegerField(default=0) # 0 => draft, 1 => public, 2 => private, 3 => deleted
+    author = models.IntegerField()
     category = models.CharField(max_length=50, null=True)
     created_at = models.DateTimeField(default=timezone.now())
     updated_at = models.DateTimeField(default=timezone.now())
