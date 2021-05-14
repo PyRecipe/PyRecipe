@@ -11,13 +11,13 @@
             <ul class="navbar-nav mb-2 mb-lg-0">
                 {% if True %}
                     <li class="nav-item">
-                        <a class="nav-link" href="#"><img src="static/plus.svg" /> Yeni</a>
+                        <a class="nav-link" href="#"><img src="http://{{ request.get_host }}/static/plus.svg" /> Yeni</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="tariflerim">Tariflerim</a>
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" id="navbarProfileDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" href="#"><img src="static/user.svg" /></a>
+                        <a class="nav-link dropdown-toggle" id="navbarProfileDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" href="#"><img src="http://{{ request.get_host }}/static/user.svg" /></a>
                         <ul class="dropdown-menu dropdown-menu-lg-end" aria-labelledby="navbarProfileDropdown">
                             <li><a class="dropdown-item" href="#">Hesabım</a></li>
                             <li><a class="dropdown-item" href="/ayarlar">Ayarlar</a></li>
