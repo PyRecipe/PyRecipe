@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils import timezone
 
 class User(models.Model):
     username = models.CharField(max_length=200)
@@ -18,11 +19,10 @@ class Comment(models.Model):
 class Recipe(models.Model):
     slug = models.CharField(max_length=50)
     title = models.CharField(max_length=100)
-    description = models.TextField(max_length=300)
-    images = models.TextField(max_length=500)
-    components = models.TextField(max_length=500)
-    state = models.IntegerField() 
-    category = models.CharField(max_length=50)
-    created_at = models.DateTimeField()
-    updated_at = models.DateTimeField()
-
+    description = models.TextField(max_length=300, null=True)
+    images = models.TextField(max_length=500, null=True)
+    components = models.TextField(max_length=500, null=True)
+    state = models.IntegerField(default=0) # 0 => draft, 1 => public, 2 => private, 3 => deleted
+    category = models.CharField(max_length=50, null=True)
+    created_at = models.DateTimeField(default=timezone.now())
+    updated_at = models.DateTimeField(default=timezone.now())
