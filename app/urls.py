@@ -13,5 +13,5 @@ urlpatterns = [
     path('duzenle', views.editing, name='editing'),
     path('ekle', views.adding, name='adding'),
     path('tariflerim', views.my_recipes, name='my_recipes'),
-    path('tarif-adi', views.recipe, name='recipe-name'),
+    path('tarif/<str:slug>/', views.recipe, name='recipe'),
 ]

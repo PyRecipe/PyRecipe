@@ -1,5 +1,7 @@
 from django.shortcuts import render
 
+from .models import Recipe
+
 # homepage
 def index(request):
     return render(request, 'index.html')
@@ -37,5 +39,6 @@ def my_recipes(request):
     return render(request, 'my_recipes.html')
 
 # recipe
-def recipe(request):
-    return render(request, 'recipe.html')
+def recipe(request, slug):
+    recipe = Recipe.objects.get(slug=slug)
+    return render(request, 'recipe.html', {'recipe': recipe})
