@@ -19,25 +19,25 @@ class TestUrls(SimpleTestCase):
         url = reverse('app:login')
         self.assertEquals(resolve(url).func, views.login)
 
-    def test_signup_url_is_resolved(self):
-        url = reverse('app:signup')
-        self.assertEquals(resolve(url).func, views.signup)
+    def test_register_url_is_resolved(self):
+        url = reverse('app:register')
+        self.assertEquals(resolve(url).func, views.register)
 
     def test_search_url_is_resolved(self):
-        url = reverse('app:searching')
-        self.assertEquals(resolve(url).func, views.searching)
+        url = reverse('app:search')
+        self.assertEquals(resolve(url).func, views.search)
 
-    def test_search_listing_url_is_resolved(self):
-        url = reverse('app:search-listing')
-        self.assertEquals(resolve(url).func, views.searchListing)
+    def test_search_list_url_is_resolved(self):
+        url = reverse('app:search-list')
+        self.assertEquals(resolve(url).func, views.searchList)
 
     def test_edit_url_is_resolved(self):
-        url = reverse('app:editing')
-        self.assertEquals(resolve(url).func, views.editing)
+        url = reverse('app:edit')
+        self.assertEquals(resolve(url).func, views.edit)
 
     def test_add_url_is_resolved(self):
-        url = reverse('app:adding')
-        self.assertEquals(resolve(url).func, views.adding)
+        url = reverse('app:add')
+        self.assertEquals(resolve(url).func, views.add)
 
     def test_my_recipes_url_is_resolved(self):
         url = reverse('app:my_recipes')
