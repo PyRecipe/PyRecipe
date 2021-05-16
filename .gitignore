@@ -3,7 +3,3 @@ Pipfile.lock
 .vscode
 __pycache__
 db.sqlite3
-app/migrations/*
-
-# Files we want to continue to track
-!app/migrations/__init__.py
