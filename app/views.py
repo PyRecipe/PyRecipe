@@ -1,4 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+
+from .models import Recipe
 
 # homepage
 def index(request):
@@ -37,5 +39,9 @@ def my_recipes(request):
     return render(request, 'my_recipes.html')
 
 # recipe
-def recipe(request):
-    return render(request, 'recipe.html')
+def recipe(request, slug):
+    try:
+        recipe = Recipe.objects.get(slug=slug)
+        return render(request, 'recipe.html', {'recipe': recipe})
+    except Recipe.DoesNotExist:
+        return redirect('/')
