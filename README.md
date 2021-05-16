@@ -1,5 +1,7 @@
 # PyRecipe
 
+[Visit Documentation](https://pyrecipe-docs.netlify.app)
+
 ## How to contribute
 1) Pull the latest changes with `git pull`.
 2) Pick a issue to work (in this case the issue should be attachted to you).
