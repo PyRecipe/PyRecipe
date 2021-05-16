@@ -14,25 +14,25 @@ def settings(request):
 def login(request):
     return render(request, 'login.html')
 
-# signup
-def signup(request):
-    return render(request, 'signup.html')
+# register
+def register(request):
+    return render(request, 'register.html')
 
-# searching
-def searching(request):
-    return render(request, 'searching.html')
+# search
+def search(request):
+    return render(request, 'search.html')
 
-# search-listing
-def searchListing(request):
-    return render(request, 'search-listing.html')
+# search-list
+def searchList(request):
+    return render(request, 'search-list.html')
 
-# editing
-def editing(request):
-    return render(request, 'editing.html')
+# edit
+def edit(request):
+    return render(request, 'edit.html')
 
-# adding
-def adding(request):
-    return render(request, 'adding.html')
+# add
+def add(request):
+    return render(request, 'add.html')
 
 # my_recipes
 def my_recipes(request):
