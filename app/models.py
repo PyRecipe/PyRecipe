@@ -23,12 +23,12 @@ class Comment(models.Model):
 class Recipe(models.Model):
     slug = models.CharField(max_length=50)
     title = models.CharField(max_length=100)
-    description = models.TextField(max_length=300, null=True)
-    images = models.TextField(max_length=500, null=True)
-    components = models.TextField(max_length=500, null=True)
+    description = models.TextField(max_length=300, null=True, blank=True)
+    images = models.TextField(max_length=500, null=True, blank=True)
+    components = models.TextField(max_length=500, null=True, blank=True)
     state = models.IntegerField(default=0) # 0 => draft, 1 => public, 2 => private, 3 => deleted
     author = models.IntegerField()
-    category = models.CharField(max_length=50, null=True)
+    category = models.CharField(max_length=50, null=True, blank=True)
     created_at = models.DateTimeField(default=timezone.now())
     updated_at = models.DateTimeField(default=timezone.now())
 
