@@ -10,7 +10,7 @@
 
             <!-- recipe-owner-->
             <img class="mb-1" src="{{ request.host_url }}/static/user.svg">
-            <label>{{ recipe.author }}</label>
+            <label>{{ recipe.author_info.username }}</label>
             <!-- /recipe-owner-->
             
             <!-- recipe-date-->
@@ -19,7 +19,9 @@
             <!-- /recipe-date-->
         </div>
 
-        <img style="max-width: 65em;" class="rounded mx-auto" src="https://images.wallpaperscraft.com/image/pie_baking_recipe_173786_1600x900.jpg">
+        {% if recipe.images_arr %}
+            <img style="max-width: 65em;" class="rounded mx-auto" src="{{ request.host_url }}/static/{{ recipe.images_arr.0 }}">
+        {% endif %}
         <!-- /recipe-head-->
 
         <!-- recipe-cooking-time-->
