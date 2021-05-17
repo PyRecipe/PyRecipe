@@ -1,7 +1,6 @@
 from django.test import TestCase, Client
 from django.urls import reverse
-from app.models import Recipe
-import json
+from app.models import Recipe, Comment
 
 class TestViews(TestCase):
     def setUp(self):
@@ -25,3 +24,30 @@ class TestViews(TestCase):
 
         # is it redirected
         self.assertEquals(response.status_code, 302)
+
+    def test_create_comment(self):
+        comment_count = len(Comment.objects.all())
+        response = self.client.post(
+          self.recipe_url,
+          {
+              'recipe_id': 1,
+              'comment': "afamsdöfnams dnföasmfnödasf"
+          }
+        )
+
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(len(Comment.objects.all()), comment_count + 1)
+
+    def test_create_comment_without_comment(self):
+        comment_count = len(Comment.objects.all())
+
+        response = self.client.post(
+          self.recipe_url,
+          {
+              'recipe_id': 1,
+              'comment': ""
+          }
+        )
+
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(len(Comment.objects.all()), comment_count)
