@@ -122,23 +122,25 @@
             <!-- /comments -->
            
             <!-- form-comment -->
-            <div class="mt-5 w-75 text-center mx-auto">
+            <form name="form" action="/tarif/{{ recipe.slug }}/" method="POST" class="mt-5 w-75 text-center mx-auto">
                 <h5 class="fw-bold">Bir Yorum Yazın</h5>
-
-                <!-- form-textarea -->
-                <div class="form-floating">
-                    <textarea type="text" style="height: 100px" class="form-control" placeholder="Tarif hakkında fikriniz, yorumunuzu paylaşın."></textarea>
-                    <label class="text-muted">Tarif hakkında fikriniz, yorumunuzu paylaşın.</label>
+                <!-- Error message improvements required -->
+                {% if form.errors %}
+                    {% for field in form %}
+                        {% for error in field.errors %}
+                          <div class="alert alert-danger">
+                            {{ error|escape }}
+                          </div>
+                        {% endfor %}
+                    {% endfor %}
+                {% endif %}
+                {% csrf_token %}
+                <input name="recipe_id" type="hidden" value="{{ recipe.pk }}" />
+                <div class="form-group">
+                    <textarea name="comment" type="text" style="height: 100px" class="form-control" placeholder="Tarif hakkında fikriniz, yorumunuzu paylaşın."></textarea>
                 </div>
-                <!-- /form-textarea -->
-
-                <!-- form-button -->
-                <div class="text-start mt-1">
-                    <button type="button" class="btn btn-primary btn-sm">Yorumu Gönder</button>
-                </div>
-                <!-- /form-button -->
-                
-            </div>
+                <button type="submit" class="d-block mt-2 btn btn-primary btn-sm">Paylaş</button>
+            </form>
             <!-- /form-comment -->
 
         </div>
