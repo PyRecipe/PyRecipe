@@ -7,6 +7,10 @@ class Comment(models.Model):
     user_id = models.CharField(max_length=30)
     comment = models.TextField(max_length=500)
     created_at = models.DateTimeField(default=timezone.now())
+
+    def author_info(self):
+        """Returns information about the author"""
+        return User.objects.get(pk=self.user_id)
     
 class Recipe(models.Model):
     slug = models.CharField(max_length=50)

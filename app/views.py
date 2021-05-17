@@ -1,8 +1,6 @@
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
-
 from .forms import CommentForm
-
 from .models import Recipe, Comment
 
 # homepage
@@ -45,6 +43,7 @@ def my_recipes(request):
 def recipe(request, slug):
     try:
         recipe = Recipe.objects.get(slug=slug)
+        comments = Comment.objects.filter(recipe_id=recipe.pk)
         if request.method == 'POST':
             form = CommentForm(request.POST)
             if form.is_valid():
@@ -56,6 +55,7 @@ def recipe(request, slug):
                 )
         else:
             form = CommentForm()
-        return render(request, 'recipe.html', {'recipe': recipe, 'form': form})
+        
+        return render(request, 'recipe.html', {'recipe': recipe, 'comments': comments, 'form': form})
     except Recipe.DoesNotExist:
         return redirect('/')
