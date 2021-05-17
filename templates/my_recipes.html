@@ -3,101 +3,28 @@
 {% block content %}
 
 <div class="container">
-    <h2 class="text-center mt-4">Tariflerim</h2>
-    <br>
-    <div class="row justify-content-center">
-      <div class="col-auto mb-3">
-        <div class="card" style="width: 20rem;">
-            <img src="https://joyfoodsunshine.com/wp-content/uploads/2016/09/easy-pizza-casserole-recipe-5.jpg" class="card-img-top rounded" style="height: 18em; width: 20em;" alt="...">
-            <div class="card-body">
-              <h5 class="card-title">Lorem ipsum</h5>
-              <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut. </p>
-              <a href="#" class="btn btn-success">Düzenle</a>
-              <a href="#" class="btn btn-success">Sil</a>
-            </div>
-        </div>
-      </div>
-      <div class="col-auto mb-3">
-       
-        <div class="card" style="width: 20rem;">
-            <img src="https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fimages.media-allrecipes.com%2Fuserphotos%2F7782449.jpg" class="card-img-top rounded" style="height: 18em; width: 20em;"alt=...">
-            <div class="card-body">
-              <h5 class="card-title">Lorem ipsum</h5>
-              <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut.</p>
-              <a href="#" class="btn btn-success">Düzenle</a>
-              <a href="#" class="btn btn-success">Sil</a>
-            </div>
-        </div>
-        
-      </div>
-      <div class="col-auto mb-3">
-        
-        <div class="card" style="width: 20rem;">
-            <img src="https://images.immediate.co.uk/production/volatile/sites/30/2020/08/chorizo-mozarella-gnocchi-bake-cropped-9ab73a3.jpg?quality=90&resize=960,872" class="card-img-top rounded" style="height: 18em; width: 20em;" alt="...">
-            <div class="card-body">
-              <h5 class="card-title">Lorem ipsum</h5>
-              <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut.</p>
-              <a href="#" class="btn btn-success">Düzenle</a>
-              <a href="#" class="btn btn-success">Sil</a>
-            </div>
-        </div>
-        
-      </div>
-    </div>
-    <br>
-    <div class="row justify-content-center">
-        <div class="col-auto mb-3">
+  <h2 class="text-center mt-4 mb-4">Tariflerim</h2>
+  <div class="row justify-content-center">
+
+    {% for recipe in object_list %}
+      <div class="col-3 mb-3 ms-4 me-4">
+        <a class="text-decoration-none text-dark" href="/tarif/{{ recipe.slug }}/">
           <div class="card" style="width: 20rem;">
-              <img src="https://joyfoodsunshine.com/wp-content/uploads/2016/09/easy-pizza-casserole-recipe-5.jpg" class="card-img-top rounded" style="height: 18em; width: 20em;" alt="...">
-              <div class="card-body">
-                <h5 class="card-title">Lorem ipsum</h5>
-                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut. </p>
-                <a href="#" class="btn btn-success">Düzenle</a>
-                <a href="#" class="btn btn-success">Sil</a>
-              </div>
+            {% if recipe.images_arr %}
+            <img src="{{ request.host_url }}/static/{{ recipe.images_arr.0 }}" class="card-img-top rounded" style="height: 18em; width: 20em;" alt="...">
+            {% endif %}
+            <div class="card-body">
+              <h5 class="card-title">{{ recipe.title }}</h5>
+              <p class="card-text mb-2">{{ recipe.first_paragraph }}</p>
+              <a href="duzenle/{{ recipe.slug }}/" class="btn btn-success">Düzenle</a>
+              <a href="sil/{{ recipe.slug }}/" class="btn btn-success">Sil</a>
+            </div>
           </div>
-        </div>
-   
-    <div class="col-auto mb-3">
-        <div class="card" style="width: 20rem;">
-            <img src="https://images.immediate.co.uk/production/volatile/sites/30/2020/08/chorizo-mozarella-gnocchi-bake-cropped-9ab73a3.jpg?quality=90&resize=960,872" class="card-img-top rounded" style="height: 18em; width: 20em;" alt="...">
-            <div class="card-body">
-              <h5 class="card-title">Lorem ipsum</h5>
-              <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut. </p>
-              <a href="#" class="btn btn-success">Düzenle</a>
-              <a href="#" class="btn btn-success">Sil</a>
-            </div>
-        </div>
+        </a>
       </div>
-    
-    <div class="col-auto mb-3">
-        <div class="card" style="width: 20rem;">
-            <img src="https://img.buzzfeed.com/video-api-prod/assets/eb44570519264864814264f7f0a5e47a/BFV13909_BakedRatatouille-ThumbTextless1080.jpg?output-format=auto&output-quality=auto" class="card-img-top rounded" style="height: 18em; width: 20em;" alt="...">
-            <div class="card-body">
-              <h5 class="card-title">Lorem ipsum</h5>
-              <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut. </p>
-              <a href="#" class="btn btn-success">Düzenle</a>
-              <a href="#" class="btn btn-success">Sil</a>
-            </div>
-        </div>
-      </div>  
+  {% endfor %}
+  
   </div>
- 
 </div>
-
-  <br>
-  <br>
-    <nav aria-label="...">
-        <ul class="pagination justify-content-center">
-        <li class="page-item active" aria-current="page">
-            <span class="page-link">1</span>
-        </li>
-        <li class="page-item"><a class="page-link" href="#">2</a></li>
-        <li class="page-item"><a class="page-link" href="#">3</a></li>
-        </ul>
-    </nav>
-
-    <br>
-    
 
 {% endblock %}

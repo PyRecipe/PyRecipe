@@ -1,24 +1,27 @@
 from django.db import models
 from django.contrib.auth.models import User
-from django.utils import timezone
 
 class Comment(models.Model):
     recipe_id = models.CharField(max_length=30)
     user_id = models.CharField(max_length=30)
     comment = models.TextField(max_length=500)
-    created_at = models.DateTimeField(default=timezone.now())
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def author_info(self):
+        """Returns information about the author"""
+        return User.objects.get(pk=self.user_id)
     
 class Recipe(models.Model):
     slug = models.CharField(max_length=50)
     title = models.CharField(max_length=100)
-    description = models.TextField(max_length=300, null=True, blank=True)
+    description = models.TextField(max_length=800, null=True, blank=True)
     images = models.TextField(max_length=500, null=True, blank=True)
     components = models.TextField(max_length=500, null=True, blank=True)
     state = models.IntegerField(default=0) # 0 => draft, 1 => public, 2 => private, 3 => deleted
     author = models.IntegerField()
     category = models.CharField(max_length=50, null=True, blank=True)
-    created_at = models.DateTimeField(default=timezone.now())
-    updated_at = models.DateTimeField(default=timezone.now())
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now_add=True)
 
     # If object called without a parameter
     def __str__(self):
@@ -41,3 +44,7 @@ class Recipe(models.Model):
             return self.components.split(',')
         else:
             return []
+
+    def first_paragraph(self):
+        """Returns first paragraph on description"""
+        return self.description.split('\n')[0]

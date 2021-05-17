@@ -67,78 +67,54 @@
         <div class="mt-5">
             <div class="text-center">
                 <label class="fw-bolder fs-5">Yorumlar • </label>
-                <label class="fw-bolder fs-6">{Yorum Sayısı}</label>
+                <label class="fw-bolder fs-6">{{ comments|length }}</label>
             </div>
 
             <!-- comments -->
             <div class="mt-3 w-75 mx-auto">
 
-                <!-- comment-first -->
+                {% for comment in comments %}
+                <!-- comment -->
                 <div class="row">
                     <div class="col text-start">
                         <img class="mb-1" src="http://{{ request.get_host }}/static/user.svg">
-                        <label>Ad Soyad • </label>
-                        <label class="fst-italic">Kullanıcı Adı</label>
+                        <label>{{ comment.author_info.first_name }} {{ comment.author_info.last_name }} • </label>
+                        <label class="fst-italic">{{ comment.author_info.username }}</label>
                     </div>
 
                     <div class="col text-end">
-                        <label class="fst-italic">created_at</label>
+                        <label class="fst-italic">{{ comment.created_at }}</label>
                     </div>
 
                     <div class="ms-3 me-3">
-                        <label>Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                            sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                            Enim eu turpis egestas pretium aenean pharetra magna ac.
-                            Rutrum quisque non tellus orci ac auctor. Ornare lectus sit amet est placerat.
-                            Quisque non tellus orci ac auctor augue mauris augue.
-                        </label>
+                        {{ comment.comment }}
                     </div>
                 </div>
-                <!-- /comment-first -->
-                
-                <!-- comment-second -->
-                <div class="row mt-5">
-                    <div class="col text-start">
-                        <img class="mb-1" src="http://{{ request.get_host }}/static/user.svg">
-                        <label>Ad Soyad • </label>
-                        <label class="fst-italic">Kullanıcı Adı</label>
-                    </div>
-
-                    <div class="col text-end">
-                        <label class="fst-italic">created_at</label>
-                    </div>
-
-                    <div class="ms-3 me-3">
-                        <label>Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                            sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                            Enim eu turpis egestas pretium aenean pharetra magna ac.
-                            Rutrum quisque non tellus orci ac auctor. Ornare lectus sit amet est placerat.
-                            Quisque non tellus orci ac auctor augue mauris augue.
-                        </label>
-                    </div>
-                </div>
-                <!-- /comment-second -->
+                <!-- /comment -->
+                {% endfor %}
             </div>
             <!-- /comments -->
            
             <!-- form-comment -->
-            <div class="mt-5 w-75 text-center mx-auto">
+            <form name="form" action="/tarif/{{ recipe.slug }}/" method="POST" class="mt-5 w-75 text-center mx-auto">
                 <h5 class="fw-bold">Bir Yorum Yazın</h5>
-
-                <!-- form-textarea -->
-                <div class="form-floating">
-                    <textarea type="text" style="height: 100px" class="form-control" placeholder="Tarif hakkında fikriniz, yorumunuzu paylaşın."></textarea>
-                    <label class="text-muted">Tarif hakkında fikriniz, yorumunuzu paylaşın.</label>
+                <!-- Error message improvements required -->
+                {% if form.errors %}
+                    {% for field in form %}
+                        {% for error in field.errors %}
+                          <div class="alert alert-danger">
+                            {{ error|escape }}
+                          </div>
+                        {% endfor %}
+                    {% endfor %}
+                {% endif %}
+                {% csrf_token %}
+                <input name="recipe_id" type="hidden" value="{{ recipe.pk }}" />
+                <div class="form-group">
+                    <textarea name="comment" type="text" style="height: 100px" class="form-control" placeholder="Tarif hakkında fikriniz, yorumunuzu paylaşın."></textarea>
                 </div>
-                <!-- /form-textarea -->
-
-                <!-- form-button -->
-                <div class="text-start mt-1">
-                    <button type="button" class="btn btn-primary btn-sm">Yorumu Gönder</button>
-                </div>
-                <!-- /form-button -->
-                
-            </div>
+                <button type="submit" class="d-block mt-2 btn btn-primary btn-sm">Paylaş</button>
+            </form>
             <!-- /form-comment -->
 
         </div>

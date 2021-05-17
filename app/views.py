@@ -1,7 +1,9 @@
+from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
-
-from .models import Recipe
+from django.views.generic import ListView
+from .forms import CommentForm
 from .forms import CreateUserForm
+from .models import Recipe, Comment
 
 # homepage
 def index(request):
@@ -46,15 +48,30 @@ def add(request):
     return render(request, 'add.html')
 
 # my_recipes
-def my_recipes(request):
-    return render(request, 'my_recipes.html')
+class MyRecipes(ListView):
+    model = Recipe
+    template_name = 'my_recipes.html' 
 
 # recipe
 def recipe(request, slug):
     try:
         recipe = Recipe.objects.get(slug=slug)
-        return render(request, 'recipe.html', {'recipe': recipe})
+        comments = Comment.objects.filter(recipe_id=recipe.pk)
+        if request.method == 'POST':
+            form = CommentForm(request.POST)
+            if form.is_valid():
+                # after auth user id should be dynamicly pasted
+                Comment.objects.create(
+                  recipe_id = form.cleaned_data['recipe_id'],
+                  user_id = 1,
+                  comment = form.cleaned_data['comment']
+                )
+        else:
+            form = CommentForm()
+        
+        return render(request, 'recipe.html', {'recipe': recipe, 'comments': comments, 'form': form})
     except Recipe.DoesNotExist:
         return redirect('/')
+
 
 
