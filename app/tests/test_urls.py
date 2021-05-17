@@ -41,7 +41,7 @@ class TestUrls(SimpleTestCase):
 
     def test_my_recipes_url_is_resolved(self):
         url = reverse('app:my_recipes')
-        self.assertEquals(resolve(url).func, views.my_recipes)
+        self.assertEquals(resolve(url).func.view_class, views.MyRecipes)
 
     def test_recipe_url_is_resolved(self):
         url = reverse('app:recipe', args=['recipe'])

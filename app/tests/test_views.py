@@ -8,11 +8,18 @@ class TestViews(TestCase):
         self.recipe1 = Recipe.objects.create(
             slug = "recipe",
             title = "Recipe",
+            description= "Recipe Descriptions",
             author = 1
         )
         self.recipe_url = reverse('app:recipe', args=['recipe'])
         self.recipe_undefined_url = reverse('app:recipe', args=['this-recipe-not-exists'])
 
+        self.my_recipes_url = reverse('app:my_recipes')
+
+
+
+
+    """ Recipe View Tests """
     def test_recipe_GET(self):
         response = self.client.get(self.recipe_url)
 
@@ -25,6 +32,10 @@ class TestViews(TestCase):
         # is it redirected
         self.assertEquals(response.status_code, 302)
 
+
+
+
+    """ Comment Tests """
     def test_create_comment(self):
         comment_count = len(Comment.objects.all())
         response = self.client.post(
@@ -51,3 +62,13 @@ class TestViews(TestCase):
 
         self.assertEqual(response.status_code, 200)
         self.assertEqual(len(Comment.objects.all()), comment_count)
+
+
+
+
+    """ My Recipes View Tests"""
+    def test_my_recipes_GET(self):
+        response = self.client.get(self.my_recipes_url)
+
+        self.assertEquals(response.status_code, 200)
+        self.assertTemplateUsed(response, 'my_recipes.html') 
