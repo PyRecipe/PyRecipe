@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 
 from .models import Recipe
+from .forms import CreateUserForm
 
 # homepage
 def index(request):
@@ -16,7 +17,17 @@ def login(request):
 
 # register
 def register(request):
-    return render(request, 'register.html')
+    
+    if request.method == 'POST':
+
+        user = CreateUserForm(request.POST)
+        if user.is_valid():
+            user.save()
+    else:
+        user = CreateUserForm()
+        
+    context = {'form':user}
+    return render(request, 'register.html',context)
 
 # search
 def search(request):
@@ -45,3 +56,5 @@ def recipe(request, slug):
         return render(request, 'recipe.html', {'recipe': recipe})
     except Recipe.DoesNotExist:
         return redirect('/')
+
+
