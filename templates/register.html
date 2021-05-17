@@ -4,7 +4,7 @@
     <section style="height: 68vh;" class="d-flex align-items-center justify-content-center container">
         <div>
             <h2 class="mb-4">Kayıt Ol</h2>
-            <form action="{% url 'app:register' %}" method="POST" >
+            <form action="{% url 'app:login' %}" method="POST" >
                 {% csrf_token %}
                 <!-- form-name -->
                 <div class="row mb-3">
@@ -56,7 +56,7 @@
                 <!-- form-button -->
                 <div class="text-start mt-3">
                     <button type="submit" class="btn btn-primary">Kayıt Ol</button>
-                </div>
+                </div> 
                 <!-- /form-button -->
             </form>
         </div>
