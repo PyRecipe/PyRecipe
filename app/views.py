@@ -1,5 +1,6 @@
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
+from django.views.generic import ListView
 from .forms import CommentForm
 from .models import Recipe, Comment
 
@@ -36,8 +37,9 @@ def add(request):
     return render(request, 'add.html')
 
 # my_recipes
-def my_recipes(request):
-    return render(request, 'my_recipes.html')
+class MyRecipes(ListView):
+    model = Recipe
+    template_name = 'my_recipes.html' 
 
 # recipe
 def recipe(request, slug):
