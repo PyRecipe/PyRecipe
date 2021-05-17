@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 
-from .models import Recipe
+from .models import Recipe, Comment
 
 # homepage
 def index(request):
@@ -42,6 +42,7 @@ def my_recipes(request):
 def recipe(request, slug):
     try:
         recipe = Recipe.objects.get(slug=slug)
-        return render(request, 'recipe.html', {'recipe': recipe})
+        comments = Comment.objects.filter(recipe_id=recipe.pk)
+        return render(request, 'recipe.html', {'recipe': recipe, 'comments': comments})
     except Recipe.DoesNotExist:
         return redirect('/')
