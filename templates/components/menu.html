@@ -5,9 +5,10 @@
             <span class="navbar-toggler-icon"></span>
         </button> 
         <div class="collapse navbar-collapse" id="navbarText">
-            <div class="m-auto w-50">
-                <input type="text" class="form-control" placeholder="Malzeme, Tarif veya Kullanıcı ara..." />
-            </div>
+            <form action="/ara" method="POST" class="m-auto w-50">
+                {% csrf_token %}
+                <input name="search" type="text" class="form-control" placeholder="Malzeme, Tarif veya Kullanıcı ara..." />
+            </form>
             <ul class="navbar-nav mb-2 mb-lg-0">
                 {% if True %}
                     <li class="nav-item">

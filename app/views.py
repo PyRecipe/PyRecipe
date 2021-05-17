@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
-
 from .models import Recipe, Comment
+from .forms import SearchForm
 
 # homepage
 def index(request):
@@ -20,7 +20,14 @@ def register(request):
 
 # search
 def search(request):
-    return render(request, 'search.html')
+    if request.method == 'GET':
+        return render(request, 'search.html')
+    elif request.method == 'POST':
+        form = SearchForm(request.POST)
+        if form.is_valid():
+            search = form.cleaned_data['search']
+            results = Recipe.objects.filter(title__contains=search)
+            return render(request, 'search-list.html', {'query': search, 'results': results})
 
 # search-list
 def searchList(request):
