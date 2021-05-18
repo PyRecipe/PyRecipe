@@ -5,11 +5,12 @@
             <span class="navbar-toggler-icon"></span>
         </button> 
         <div class="collapse navbar-collapse" id="navbarText">
-            <div class="m-auto w-50">
-                <input type="text" class="form-control" placeholder="Malzeme, Tarif veya Kullanıcı ara..." />
-            </div>
+            <form action="/ara" method="POST" class="m-auto w-50">
+                {% csrf_token %}
+                <input name="search" type="text" class="form-control" placeholder="Malzeme, Tarif veya Kullanıcı ara..." />
+            </form>
             <ul class="navbar-nav mb-2 mb-lg-0">
-                {% if True %}
+                {% if user.pk != None %}
                     <li class="nav-item">
                         <a class="nav-link" href="#"><img src="http://{{ request.get_host }}/static/plus.svg" /> Yeni</a>
                     </li>
@@ -19,7 +20,6 @@
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" id="navbarProfileDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" href="#"><img src="http://{{ request.get_host }}/static/user.svg" /></a>
                         <ul class="dropdown-menu dropdown-menu-lg-end" aria-labelledby="navbarProfileDropdown">
-                            <li><a class="dropdown-item" href="#">Hesabım</a></li>
                             <li><a class="dropdown-item" href="/ayarlar">Ayarlar</a></li>
                             <li><a class="dropdown-item" href="#">Çıkış Yap</a></li>
                         </ul>

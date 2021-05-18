@@ -5,56 +5,29 @@
     <!-- search-listing -->
     <section class="my-5">
         <div class="container">
-            <h3 class="mb-4">Arama Sonuçları</h3>
+            <h4 class="mb-4">'{{ query }}' için arama Sonuçları</h4>
 
             <!-- search-results -->
             <div class="row">
+                {% for result in results %}
 
                 <!-- search-result -->
                 <div class="col-lg-4">
-                    <a href="#" class="d-block my-2" style="text-decoration: none;">
-                        <img class="img-fluid rounded" src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80" />
+                    <a href="/tarif/{{ result.slug }}" class="text-dark text-decoration-none d-block my-2">
+                        {% if result.images_arr %}
+                            <img style="height: 280px; object-fit: cover; width: 100%;" class="img-fluid rounded" src="{{ request.host_url }}/static/{{ result.images_arr.0 }}" />
+                        {% else %}
+                            <img style="height: 280px; object-fit: cover; width: 100%;" class="img-fluid rounded" src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80" />
+                        {% endif %}
                         <div class="p-2">
-                            <h4>Tarif Başlığı</h4>
-                            <div>username</div>
-                        </div>
-                    </a> 
-                </div>
-                <!-- /search-result -->
-                <!-- search-result -->
-                <div class="col-lg-4">
-                    <a href="#" class="d-block my-2" style="text-decoration: none;">
-                        <img class="img-fluid rounded" src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80" />
-                        <div class="p-2">
-                            <h4>Tarif Başlığı</h4>
-                            <div>username</div>
-                        </div>
-                    </a> 
-                </div>
-                <!-- /search-result -->
-                <!-- search-result -->
-                <div class="col-lg-4">
-                    <a href="#" class="d-block my-2" style="text-decoration: none;">
-                        <img class="img-fluid rounded" src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80" />
-                        <div class="p-2">
-                            <h4>Tarif Başlığı</h4>
-                            <div>username</div>
-                        </div>
-                    </a> 
-                </div>
-                <!-- /search-result -->
-                <!-- search-result -->
-                <div class="col-lg-4">
-                    <a href="#" class="d-block my-2" style="text-decoration: none;">
-                        <img class="img-fluid rounded" src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80" />
-                        <div class="p-2">
-                            <h4>Tarif Başlığı</h4>
-                            <div>username</div>
+                            <h4>{{ result.title }}</h4>
+                            <div>{{ result.author_info.username }}</div>
                         </div>
                     </a> 
                 </div>
                 <!-- /search-result -->
 
+                {% endfor %}
             </div>
             <!-- /search-results -->
 
