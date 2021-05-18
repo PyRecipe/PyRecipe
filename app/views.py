@@ -40,6 +40,8 @@ def search(request):
                 # user is searching with recipe name
                 results = Recipe.objects.filter(title__contains=search)
             return render(request, 'search-list.html', {'query': search, 'results': results, 'user': request.user})
+        else:
+            return redirect('/')
 
 # search-list
 def searchList(request):
