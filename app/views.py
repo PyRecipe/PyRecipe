@@ -26,7 +26,23 @@ def search(request):
         form = SearchForm(request.POST)
         if form.is_valid():
             search = form.cleaned_data['search']
-            results = Recipe.objects.filter(title__contains=search)
+            if "," in search:
+                # user is searching with components
+                search = "".join(search.split())
+                print(search)
+                components = set([x.lower() for x in search.split(",") if x.strip()])
+                results = []
+                print(components)
+                print("----------")
+                for recipe in Recipe.objects.all():
+                    recipe_components = set(recipe.components.split(","))
+                    print(recipe_components)
+                    print("----------")
+                    if components.issubset(recipe_components) or components == recipe_components:
+                        results.append(recipe)
+            else:
+                # user is searching with recipe name
+                results = Recipe.objects.filter(title__contains=search)
             return render(request, 'search-list.html', {'query': search, 'results': results})
 
 # search-list
