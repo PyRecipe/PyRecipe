@@ -1,8 +1,10 @@
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.views.generic import ListView
-from .forms import CommentForm, CreateUserForm, SearchForm
+from .forms import CommentForm, CreateUserForm, SearchForm, LoginForm
 from .models import Recipe, Comment 
+from django.contrib.auth import authenticate, login
+from django.contrib import messages
 
 # homepage
 def index(request):
@@ -13,8 +15,26 @@ def settings(request):
     return render(request, 'settings.html', {'user': request.user})
 
 # login
-def login(request):
-    return render(request, 'login.html', {'user': request.user})
+def userLogin(request):
+    if request.method == "POST":
+        form = LoginForm(request.POST)
+        if form.is_valid():
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password']
+            user = authenticate(request, username=username, password=password)
+
+            if user is not None:
+                if user.is_active:
+                    login(request, user)
+                    return redirect('/')
+                else:
+                    messages.info(request, 'Hesap Devre Dışı')
+            else:
+                messages.info(request, 'Kullanıcı adı ve şifrenizi kontrol edin.')
+    else:
+        form = LoginForm()
+
+    return render(request, 'login.html', {'form': form})
 
 # register
 def register(request):    
@@ -25,8 +45,7 @@ def register(request):
     else:
         user = CreateUserForm()
         
-    context = {'form':user}
-    return render(request, 'register.html',context)
+    return render(request, 'register.html', {'form':user, 'user':request.user})
 
 # search
 def search(request):
