@@ -7,6 +7,7 @@ urlpatterns = [
     path('', views.index, name='index'),
     path('ayarlar', views.settings, name='settings'),
     path('giris', views.login, name='login'),
+    path('cikis', views.logout_view, name='logout'),
     path('kayit', views.register, name='register'),
     path('ara', views.search, name='search'),
     path('arama-sonucu', views.searchList, name='search-list'),

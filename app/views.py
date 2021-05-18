@@ -1,6 +1,7 @@
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.views.generic import ListView
+from django.contrib.auth import logout
 from .forms import CommentForm, CreateUserForm, SearchForm
 from .models import Recipe, Comment 
 
@@ -15,6 +16,11 @@ def settings(request):
 # login
 def login(request):
     return render(request, 'login.html', {'user': request.user})
+
+# logout
+def logout_view(request):
+    logout(request)
+    return redirect('/')
 
 # register
 def register(request):    
