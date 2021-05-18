@@ -4,19 +4,19 @@ from .forms import SearchForm
 
 # homepage
 def index(request):
-    return render(request, 'index.html')
+    return render(request, 'index.html', {'user': request.user})
 
 # settings
 def settings(request):
-    return render(request, 'settings.html')
+    return render(request, 'settings.html', {'user': request.user})
 
 # login
 def login(request):
-    return render(request, 'login.html')
+    return render(request, 'login.html', {'user': request.user})
 
 # register
 def register(request):
-    return render(request, 'register.html')
+    return render(request, 'register.html', {'user': request.user})
 
 # search
 def search(request):
@@ -28,44 +28,40 @@ def search(request):
             search = form.cleaned_data['search']
             if "," in search:
                 # user is searching with components
-                search = "".join(search.split())
-                print(search)
-                components = set([x.lower() for x in search.split(",") if x.strip()])
+                search_stripped = "".join(search.split())
+                components = set([x.lower() for x in search_stripped.split(",") if x.strip()])
                 results = []
-                print(components)
-                print("----------")
                 for recipe in Recipe.objects.all():
-                    recipe_components = set(recipe.components.split(","))
-                    print(recipe_components)
-                    print("----------")
+                    recipe_components_stripped = "".join(recipe.components.split())
+                    recipe_components = set([x.lower() for x in recipe_components_stripped.split(",") if x.strip()])
                     if components.issubset(recipe_components) or components == recipe_components:
                         results.append(recipe)
             else:
                 # user is searching with recipe name
                 results = Recipe.objects.filter(title__contains=search)
-            return render(request, 'search-list.html', {'query': search, 'results': results})
+            return render(request, 'search-list.html', {'query': search, 'results': results, 'user': request.user})
 
 # search-list
 def searchList(request):
-    return render(request, 'search-list.html')
+    return render(request, 'search-list.html', {'user': request.user})
 
 # edit
 def edit(request):
-    return render(request, 'edit.html')
+    return render(request, 'edit.html', {'user': request.user})
 
 # add
 def add(request):
-    return render(request, 'add.html')
+    return render(request, 'add.html', {'user': request.user})
 
 # my_recipes
 def my_recipes(request):
-    return render(request, 'my_recipes.html')
+    return render(request, 'my_recipes.html', {'user': request.user})
 
 # recipe
 def recipe(request, slug):
     try:
         recipe = Recipe.objects.get(slug=slug)
         comments = Comment.objects.filter(recipe_id=recipe.pk)
-        return render(request, 'recipe.html', {'recipe': recipe, 'comments': comments})
+        return render(request, 'recipe.html', {'recipe': recipe, 'comments': comments, 'user': request.user})
     except Recipe.DoesNotExist:
         return redirect('/')

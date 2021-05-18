@@ -20,16 +20,9 @@
         </div>
 
         {% if recipe.images_arr %}
-            <img style="max-width: 65em;" class="rounded mx-auto" src="{{ request.host_url }}/static/{{ recipe.images_arr.0 }}">
+            <img style="width: 100%; height: 500px; object-fit: cover;" class="rounded" src="{{ request.host_url }}/static/{{ recipe.images_arr.0 }}">
         {% endif %}
         <!-- /recipe-head-->
-
-        <!-- recipe-cooking-time-->
-        <div class="text-center mt-4">
-            <h5 class="fw-bold">Hazırlık Süresi</h5>
-            <label>15dk</label>
-        </div>
-        <!-- /recipe-cooking-time-->
 
         <!-- recipe-elements-->
         <div class="mt-3">
@@ -55,8 +48,8 @@
         <div class="container mt-4 w-75 mx-auto">
             <div class="row">
                 {% for recipe_image in recipe.images_arr %}
-                    <div class="col-lg-6">
-                        <img class="img-fluid rounded" src="{{ request.host_url }}/static/{{ recipe_image }}">
+                    <div class="col-lg-6 mb-4">
+                        <img style="width: 100%; height: 280px; object-fit: cover;" class="img-fluid rounded" src="{{ request.host_url }}/static/{{ recipe_image }}">
                     </div>
                 {% endfor %}
             </div>
