@@ -4,15 +4,16 @@
     <section style="height: 68vh;" class="d-flex align-items-center justify-content-center container">
         <div>
             <h2 class="mb-4">Kayıt Ol</h2>
-            <form>
+            <form action="{% url 'app:login' %}" method="POST" >
+                {% csrf_token %}
                 <!-- form-name -->
                 <div class="row mb-3">
                     <div class="col form-floating">
-                        <input type="text" class="form-control" placeholder="Ad">
+                        {{form.first_name}}
                         <label class="ms-3">Ad</label>
                     </div>
                     <div class="col form-floating">
-                        <input type="text" class="form-control" placeholder="Soyad">
+                        {{form.last_name}}
                         <label class="ms-3">Soyad</label>
                     </div>
                 </div>
@@ -20,14 +21,14 @@
 
                 <!-- form-username -->
                 <div class="form-floating mb-3">
-                    <input type="text" class="form-control" placeholder="Kullanıcı Adı">
+                    {{form.username}}
                     <label class="ms-1">Kullanıcı Adı</label>
                 </div>
                 <!-- /form-username -->
 
                 <!-- form-email -->
                 <div class="form-floating mb-3">
-                    <input type="email" class="form-control" placeholder="E-posta">
+                    {{form.email}}
                     <label class="ms-1">E-posta</label>
                 </div>
                 <!-- /form-email -->
@@ -35,11 +36,11 @@
                 <!-- form-password -->
                 <div class="row mb-3">
                     <div class="col form-floating">
-                        <input type="password" class="form-control" placeholder="Şifre">
+                        {{form.password1}}
                         <label class="ms-3">Şifre</label>
                     </div>
                     <div class="col form-floating">
-                        <input type="password" class="form-control" placeholder="Şifreyi Onayla">
+                        {{form.password2}}
                         <label class="ms-3">Şifreyi Onayla</label>
                     </div>
                 </div>
@@ -54,11 +55,33 @@
 
                 <!-- form-button -->
                 <div class="text-start mt-3">
-                    <button type="button" class="btn btn-primary">Kayıt Ol</button>
-                </div>
+                    <button type="submit" class="btn btn-primary">Kayıt Ol</button>
+                </div> 
                 <!-- /form-button -->
             </form>
         </div>
     </section>
+
+
+{% endblock %}
+
+
+{% block scripts %}
+
+<script>
+    var form_fields = document.getElementsByTagName('input')
+    form_fields[1].placeholder = 'Ad';
+    form_fields[2].placeholder = 'Soyad';
+    form_fields[3].placeholder = 'Kullanıcı Adı';
+    form_fields[4].placeholder = 'E-posta';
+    form_fields[5].placeholder = 'Şifre';
+    form_fields[6].placeholder = 'Şifreyi Onayla';
+
+
+    for (var field in form_fields){
+        form_fields[field].className += ' form-control'
+    }
+
+</script>
 
 {% endblock %}
