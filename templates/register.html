@@ -4,7 +4,7 @@
     <section style="height: 68vh;" class="d-flex align-items-center justify-content-center container">
         <div>
             <h2 class="mb-4">Kayıt Ol</h2>
-            <form action="{% url 'app:login' %}" method="POST" >
+            <form action="{% url 'app:register' %}" method="POST" >
                 {% csrf_token %}
                 <!-- form-name -->
                 <div class="row mb-3">

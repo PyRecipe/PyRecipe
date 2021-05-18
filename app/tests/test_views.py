@@ -13,13 +13,20 @@ class TestViews(TestCase):
             description= "Recipe Descriptions",
             author = 1
         )
+        self.user1 = User.objects.create(
+                first_name = 'Deneme',
+                last_name = 'denemesoyad',
+                username = 'denemeusername',
+                email = 'denememail@hotmail.com',
+                password = 'Aa9001900a1'
+            )
         
         self.recipe_url = reverse('app:recipe', args=['recipe'])
         self.recipe_undefined_url = reverse('app:recipe', args=['this-recipe-not-exists'])
         self.search_url = reverse('app:search')
         self.register_url = reverse('app:register')
         self.my_recipes_url = reverse('app:my_recipes')
-        self.login_url = reverse('app:user-login')
+        self.login_url = reverse('app:login')
 
     """ Recipe View Tests """
     def test_recipe_GET(self):
@@ -77,7 +84,7 @@ class TestViews(TestCase):
             }
         ) 
         
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, 302)
         self.assertEqual(len(User.objects.all()),amount_of_user + 1)
     
     """ Comment Tests """
@@ -126,12 +133,9 @@ class TestViews(TestCase):
         response = self.client.post(
             self.login_url,
             {
-                'username' : 'example12321',
-                'password' : 'Aa90019001'
+                'username' : "denemeusername",
+                'password' : "Aa9001900a1"
             }
         ) 
-        
-        self.assertEqual(response.status_code, 302)
-        self.assertRedirects(response, '/')
-        
+        self.assertEquals(response.status_code, 302)
         

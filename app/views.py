@@ -34,7 +34,7 @@ def userLogin(request):
     else:
         form = LoginForm()
 
-    return render(request, 'login.html', {'form': form})
+    return render(request, 'login.html', {'form': form, 'user':request.user})
 
 # register
 def register(request):    
@@ -42,6 +42,7 @@ def register(request):
         user = CreateUserForm(request.POST)
         if user.is_valid():
             user.save()
+            return redirect('/giris')
     else:
         user = CreateUserForm()
         
@@ -88,7 +89,7 @@ def add(request):
 class MyRecipes(ListView):
     model = Recipe
     template_name = 'my_recipes.html' 
-
+    
 # recipe
 def recipe(request, slug):
     try:

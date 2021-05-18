@@ -3,7 +3,7 @@
 {% block content %}
 
 <section style="height: 68vh;" class="d-flex align-items-center justify-content-center container">
-    <form class="w-50" method="POST">
+    <form class="w-50" action="{% url 'app:login' %}" method="POST">
         {% csrf_token %}
         <h2 class="text-start mb-4">Giriş Yap</h2>
 
