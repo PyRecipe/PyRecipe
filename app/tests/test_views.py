@@ -134,7 +134,18 @@ class TestViews(TestCase):
         self.assertTemplateUsed(response, 'settings.html')
 
     def test_settings_POST(self):
-        pass
+        self.test_login_user_POST() # because of login is required
+        response = self.client.post(
+            self.settings_url,
+            {
+                'first_name': "ayarlar321",
+                'last_name' : "ayarlarsoyad",
+                'email' : 'ayarlar@hotmail.com'
+            }
+        )
+        
+        self.assertEquals(response.status_code, 302)
+        
     
     """ Login View Tests """
     def test_login_GET(self):

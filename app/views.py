@@ -14,15 +14,12 @@ def index(request):
 def settings(request):
     if request.method == 'POST':
         form = EditProfileForm(request.POST, instance=request.user)
-        print("posta girdi")
         if form.is_valid():
-            print("valide girdi")
             form.save()
             return redirect('/')
         
     else:
         form = EditProfileForm()
-        print("else e girdi")
         return render(request, 'settings.html', {'user': request.user, 'form': form})
 
 
