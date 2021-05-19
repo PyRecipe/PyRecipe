@@ -8,7 +8,9 @@ from django.contrib import messages
 
 # homepage
 def index(request):
-    return render(request, 'index.html', {'user': request.user})
+    # get latest 10 recipes
+    latest_recipes = Recipe.objects.all()[:10]
+    return render(request, 'index.html', {'user': request.user, 'latest_recipes': latest_recipes})
 
 # settings
 def settings(request):
