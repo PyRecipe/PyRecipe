@@ -13,13 +13,15 @@ class TestViews(TestCase):
             description= "Recipe Descriptions",
             author = 1
         )
-        self.user1 = User.objects.create(
-                first_name = 'Deneme',
-                last_name = 'denemesoyad',
-                username = 'denemeusername',
-                email = 'denememail@hotmail.com',
-                password = 'Aa9001900a1'
-            )
+        self.user1_credentials = {
+            'first_name' : 'Deneme',
+            'last_name' : 'denemesoyad',
+            'username' : 'denemeusername',
+            'email' : 'denememail@hotmail.com',
+            'password' : 'Aa9001900a1'
+        }
+
+        User.objects.create_user(**self.user1_credentials)
         
         self.recipe_url = reverse('app:recipe', args=['recipe'])
         self.recipe_undefined_url = reverse('app:recipe', args=['this-recipe-not-exists'])
@@ -137,5 +139,5 @@ class TestViews(TestCase):
                 'password' : "Aa9001900a1"
             }
         ) 
+
         self.assertEquals(response.status_code, 302)
-        
