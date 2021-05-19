@@ -28,6 +28,7 @@ class TestViews(TestCase):
         self.search_url = reverse('app:search')
         self.register_url = reverse('app:register')
         self.my_recipes_url = reverse('app:my_recipes')
+        self.settings_url = reverse('app:settings')
         self.login_url = reverse('app:login')
 
     """ Recipe View Tests """
@@ -124,6 +125,28 @@ class TestViews(TestCase):
         self.assertEquals(response.status_code, 200)
         self.assertTemplateUsed(response, 'my_recipes.html') 
 
+
+    """ Settings Tests """
+    def test_settings_GET(self):
+        response = self.client.get(self.settings_url)
+
+        self.assertEquals(response.status_code, 200)
+        self.assertTemplateUsed(response, 'settings.html')
+
+    def test_settings_POST(self):
+        self.test_login_user_POST() # because of login is required
+        response = self.client.post(
+            self.settings_url,
+            {
+                'first_name': "ayarlar321",
+                'last_name' : "ayarlarsoyad",
+                'email' : 'ayarlar@hotmail.com'
+            }
+        )
+        
+        self.assertEquals(response.status_code, 302)
+        
+    
     """ Login View Tests """
     def test_login_GET(self):
         response = self.client.get(self.login_url)

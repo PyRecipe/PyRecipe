@@ -1,7 +1,7 @@
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.views.generic import ListView
-from .forms import CommentForm, CreateUserForm, SearchForm, LoginForm
+from .forms import CommentForm, CreateUserForm, SearchForm, LoginForm, EditProfileForm
 from .models import Recipe, Comment 
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
@@ -12,7 +12,16 @@ def index(request):
 
 # settings
 def settings(request):
-    return render(request, 'settings.html', {'user': request.user})
+    if request.method == 'POST':
+        form = EditProfileForm(request.POST, instance=request.user)
+        if form.is_valid():
+            form.save()
+            return redirect('/')
+        
+    else:
+        form = EditProfileForm()
+        return render(request, 'settings.html', {'user': request.user, 'form': form})
+
 
 # login
 def userLogin(request):
