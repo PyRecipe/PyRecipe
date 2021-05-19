@@ -19,6 +19,7 @@ class TestViews(TestCase):
         self.search_url = reverse('app:search')
         self.register_url = reverse('app:register')
         self.my_recipes_url = reverse('app:my_recipes')
+        self.settings_url = reverse('app:settings')
 
     """ Recipe View Tests """
     def test_recipe_GET(self):
@@ -113,3 +114,15 @@ class TestViews(TestCase):
 
         self.assertEquals(response.status_code, 200)
         self.assertTemplateUsed(response, 'my_recipes.html') 
+
+
+    """ Settings Tests """
+    def test_settings_GET(self):
+        response = self.client.get(self.settings_url)
+
+        self.assertEquals(response.status_code, 200)
+        self.assertTemplateUsed(response, 'settings.html')
+
+    def test_settings_POST(self):
+        
+    

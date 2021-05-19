@@ -8,17 +8,19 @@
 
             <div class="mx-auto w-50">
                 <h2>Ayarlar</h2>
-                <form class="mt-4">
-
+                <form class="mt-4" action="{% url 'app:settings' %}" method="POST" >
+                    {% csrf_token %}
                     <!-- form-name -->
                     <div class="row">
                         <div class="col">
                             <label class="mb-1">Ad</label>
-                            <input type="text" class="form-control" placeholder="Ad" aria-label="Ad" />
+                            <!-- <input type="text" class="form-control" placeholder="Ad" aria-label="Ad" /> -->
+                            {{form.first_name}}
                         </div>
                         <div class="col">
                             <label class="mb-1">Soyad</label>
-                            <input type="text" class="form-control" placeholder="Soyad" aria-label="Soyad" />
+                            <!-- <input type="text" class="form-control" placeholder="Soyad" aria-label="Soyad" /> -->
+                            {{form.last_name}}
                         </div>
                     </div>
                     <!-- /form-name -->
@@ -26,22 +28,23 @@
                     <!-- form-email -->
                     <div class="mt-3">
                         <label class="mb-1">E-posta</label>
-                        <input type="email" class="form-control" placeholder="E-posta" aria-label="E-posta" />
+                        <!-- <input type="email" class="form-control" placeholder="E-posta" aria-label="E-posta" /> -->
+                        {{form.email}}
                     </div>
                     <!-- /form-email -->
 
                     <!-- form-password -->
-                    <div class="mt-3">
+                    <!-- <div class="mt-3">
                         <label class="mb-1">Yeni Şifre</label>
                         <input type="password" class="form-control" placeholder="Şifre" aria-label="Şifre" />
-                    </div>
+                    </div> -->
                     <!-- /form-password -->
 
                     <!-- form-password-repeat -->
-                    <div class="mt-3">
+                    <!-- <div class="mt-3">
                         <label class="mb-1">Yeni Şifre Tekrarı</label>
                         <input type="password" class="form-control" placeholder="Şifre tekrarı" aria-label="Şifre tekrarı" />
-                    </div>
+                    </div> -->
                     <!-- /form-password-repeat -->
 
                     <button class="btn btn-primary mt-4" type="submit">Kaydet</button>
@@ -51,5 +54,23 @@
         </div>
     </section>
     <!-- /settings -->
+
+{% endblock %}
+
+
+{% block scripts %}
+
+<script>
+    var form_fields = document.getElementsByTagName('input')
+   
+    form_fields[3].placeholder = 'Ad';    
+    form_fields[4].placeholder = 'Soyad';
+    form_fields[5].placeholder = 'E-Posta'; 
+
+    for (var field in form_fields){
+        form_fields[field].className += ' form-control'
+    }
+
+</script>
 
 {% endblock %}
