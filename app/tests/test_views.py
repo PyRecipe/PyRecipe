@@ -90,20 +90,19 @@ class TestViews(TestCase):
         self.assertEqual(len(User.objects.all()),amount_of_user + 1)
     
     """ Comment Tests """
-    # this test is not working due to login issues
-
-    #def test_create_comment(self):
-    #    comment_count = len(Comment.objects.all())
-    #    response = self.client.post(
-    #      self.recipe_url,
-    #      {
-    #          'recipe_id': 1,
-    #          'comment': "afamsdöfnams dnföasmfnödasf"
-    #      }
-    #    )
-    #    
-    #    self.assertEqual(response.status_code, 200)
-    #    self.assertEqual(len(Comment.objects.all()), comment_count + 1)
+    def test_create_comment(self):
+        self.test_login_user_POST();
+        comment_count = len(Comment.objects.all())
+        response = self.client.post(
+          self.recipe_url,
+          {
+              'recipe_id': 1,
+              'comment': "afamsdöfnams dnföasmfnödasf"
+          }
+        )
+        
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(len(Comment.objects.all()), comment_count + 1)
 
     def test_create_comment_without_comment(self):
         comment_count = len(Comment.objects.all())
