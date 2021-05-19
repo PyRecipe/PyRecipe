@@ -16,11 +16,11 @@
                         {% for recipe in latest_recipes %}
                             <li class="splide__slide">
                                 <a href="/tarif/{{ recipe.slug }}" class="text-decoration-none text-dark">
-                                    {% if recipe.images_arr %}
+                                    <!-- {% if recipe.images_arr %}
                                         <img style="width: 100%; height: 200px; object-fit: cover;" class="img-fluid rounded shadow" src="{{ request.host_url }}/static/{{ recipe.images_arr.0 }}" />
                                     {% else %}
                                         <img style="width: 100%; height: 200px; object-fit: cover;" class="img-fluid rounded shadow" src="{{ request.host_url }}/static/recipe_image_1.jpg" />
-                                    {% endif %}
+                                    {% endif %} -->
                                     <h4 class="mt-2">{{ recipe.title }}</h4>
                                     <span>{{ recipe.author_info }}</span> 
                                 </a>
