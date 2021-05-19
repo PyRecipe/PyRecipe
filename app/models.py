@@ -1,5 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.db.models.signals import pre_save
+from PyRecipe.utils import unique_slug_generator
 
 class Comment(models.Model):
     recipe_id = models.CharField(max_length=30)
@@ -12,12 +14,12 @@ class Comment(models.Model):
         return User.objects.get(pk=self.user_id)
     
 class Recipe(models.Model):
-    slug = models.CharField(max_length=50)
+    slug = models.SlugField(max_length=100, blank=True, null=True)
     title = models.CharField(max_length=100)
     description = models.TextField(max_length=800, null=True, blank=True)
-    images = models.TextField(max_length=500, null=True, blank=True)
+    image = models.ImageField(upload_to='image/', null=True, blank=True)
     components = models.TextField(max_length=500, null=True, blank=True)
-    state = models.IntegerField(default=0) # 0 => draft, 1 => public, 2 => private, 3 => deleted
+    state = models.IntegerField(default=1) # 0 => draft, 1 => public, 2 => private, 3 => deleted
     author = models.IntegerField()
     category = models.CharField(max_length=50, null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -31,12 +33,12 @@ class Recipe(models.Model):
         """Returns information about the author"""
         return User.objects.get(pk=self.author)
 
-    def images_arr(self):
-        """Returns images as an array"""
-        if self.images is not None and self.images != "":
-            return self.images.split(',')
-        else:
-            return []
+    # def images_arr(self):
+    #     """Returns images as an array"""
+    #     if self.images is not None and self.images != "":
+    #         return self.images.split(',')
+    #     else:
+    #         return []
 
     def components_arr(self):
         """Returns components as an array"""
@@ -48,3 +50,9 @@ class Recipe(models.Model):
     def first_paragraph(self):
         """Returns first paragraph on description"""
         return self.description.split('\n')[0]
+
+def slug_generator(sender, instance, *args, **kwargs):
+    if not instance.slug:
+        instance.slug = unique_slug_generator(instance)
+
+pre_save.connect(slug_generator, sender=Recipe)

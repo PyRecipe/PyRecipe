@@ -1,7 +1,7 @@
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.views.generic import ListView 
-from .forms import CommentForm, CreateUserForm, SearchForm, LoginForm, EditProfileForm
+from .forms import CommentForm, CreateUserForm, SearchForm, LoginForm, EditProfileForm, AddForm
 from .models import Recipe, Comment 
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
@@ -23,7 +23,6 @@ def settings(request):
     else:
         form = EditProfileForm()
         return render(request, 'settings.html', {'user': request.user, 'form': form})
-
 
 # login
 def userLogin(request):
@@ -99,7 +98,25 @@ def edit(request):
 
 # add
 def add(request):
-    return render(request, 'add.html', {'user': request.user})
+    if request.method == "POST":
+        form = AddForm(request.POST)
+        
+        if form.is_valid():
+            state = form.cleaned_data['state']
+            print(state)
+            recipe = Recipe.objects.create(
+                title = form.cleaned_data['title'],
+                description = form.cleaned_data['description'],
+                components = form.cleaned_data['components'],
+                state = form.cleaned_data['state'],
+                author = request.user.pk,
+                image = form.cleaned_data['image']
+            )
+            return redirect(f'tarif/{recipe.slug}/')
+    else:
+        form = AddForm()
+    
+    return render(request, 'add.html', {'form': form, 'user': request.user})
 
 # my_recipes
 class MyRecipes(ListView):

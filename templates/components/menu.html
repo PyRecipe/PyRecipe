@@ -12,7 +12,7 @@
             <ul class="navbar-nav mb-2 mb-lg-0">
                 {% if user.pk != None %}
                     <li class="nav-item">
-                        <a class="nav-link" href="#"><img src="http://{{ request.get_host }}/static/plus.svg" /> Yeni</a>
+                        <a class="nav-link" href="/ekle"><img src="http://{{ request.get_host }}/static/plus.svg" /> Yeni</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/tariflerim">Tariflerim</a>
