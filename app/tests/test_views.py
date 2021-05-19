@@ -13,12 +13,22 @@ class TestViews(TestCase):
             description= "Recipe Descriptions",
             author = 1
         )
+        self.user1_credentials = {
+            'first_name' : 'Deneme',
+            'last_name' : 'denemesoyad',
+            'username' : 'denemeusername',
+            'email' : 'denememail@hotmail.com',
+            'password' : 'Aa9001900a1'
+        }
+
+        User.objects.create_user(**self.user1_credentials)
         
         self.recipe_url = reverse('app:recipe', args=['recipe'])
         self.recipe_undefined_url = reverse('app:recipe', args=['this-recipe-not-exists'])
         self.search_url = reverse('app:search')
         self.register_url = reverse('app:register')
         self.my_recipes_url = reverse('app:my_recipes')
+        self.login_url = reverse('app:login')
 
     """ Recipe View Tests """
     def test_recipe_GET(self):
@@ -55,7 +65,7 @@ class TestViews(TestCase):
         
         # redirect to homepage
         self.assertEquals(response.status_code, 302)
-
+  
     """ Register Tests """
     def test_register_GET(self):
         response = self.client.get(self.register_url)
@@ -76,9 +86,9 @@ class TestViews(TestCase):
             }
         ) 
         
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, 302)
         self.assertEqual(len(User.objects.all()),amount_of_user + 1)
-        
+    
     """ Comment Tests """
     def test_create_comment(self):
         comment_count = len(Comment.objects.all())
@@ -113,3 +123,21 @@ class TestViews(TestCase):
 
         self.assertEquals(response.status_code, 200)
         self.assertTemplateUsed(response, 'my_recipes.html') 
+
+    """ Login View Tests """
+    def test_login_GET(self):
+        response = self.client.get(self.login_url)
+        
+        self.assertEquals(response.status_code, 200)
+        self.assertTemplateUsed(response, 'login.html') 
+
+    def test_login_user_POST(self):
+        response = self.client.post(
+            self.login_url,
+            {
+                'username' : "denemeusername",
+                'password' : "Aa9001900a1"
+            }
+        ) 
+
+        self.assertEquals(response.status_code, 302)
