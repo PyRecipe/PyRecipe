@@ -17,4 +17,5 @@ urlpatterns = [
     # if hits /tarif redirect to homepage (/)
     path('tarif/<str:slug>/', views.recipe, name='recipe'),
     path('tariflerim/sil/<str:slug>',views.delete_recipe,name='recipe_delete'),
+    path('yorum-sil/<int:comment_id>/', views.delete_comment, name='delete-comment'),
 ]

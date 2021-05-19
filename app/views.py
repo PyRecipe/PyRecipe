@@ -8,7 +8,9 @@ from django.contrib import messages
 
 # homepage
 def index(request):
-    return render(request, 'index.html', {'user': request.user})
+    # get latest 10 recipes
+    latest_recipes = Recipe.objects.all()[:10]
+    return render(request, 'index.html', {'user': request.user, 'latest_recipes': latest_recipes})
 
 # settings
 def settings(request):
@@ -103,6 +105,7 @@ def add(request):
 class MyRecipes(ListView):
     model = Recipe
     template_name = 'my_recipes.html' 
+
     
 
 def delete_recipe(request, slug):
@@ -114,6 +117,22 @@ def delete_recipe(request, slug):
            recipe.delete()
 
     return redirect(f'/tariflerim')
+
+
+def delete_comment(request, comment_id):
+    # get information about recipe and comment
+    comment = Comment.objects.get(pk=comment_id) 
+    recipe = Recipe.objects.get(pk=comment.recipe_id)
+
+    if request.user.pk is not None:
+       if comment is not None:
+           # if the author is the logged in user
+           if comment.user_id == str(request.user.pk):
+               comment.delete()
+
+    # return previous page
+    return redirect(f'/tarif/{recipe.slug}')
+
 
 # recipe
 def recipe(request, slug):
@@ -127,7 +146,7 @@ def recipe(request, slug):
                 # after auth user id should be dynamicly pasted
                 Comment.objects.create(
                   recipe_id = form.cleaned_data['recipe_id'],
-                  user_id = 1,
+                  user_id = request.user.pk,
                   comment = form.cleaned_data['comment']
                 )
         else:

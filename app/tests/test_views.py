@@ -93,6 +93,7 @@ class TestViews(TestCase):
     
     """ Comment Tests """
     def test_create_comment(self):
+        self.test_login_user_POST();
         comment_count = len(Comment.objects.all())
         response = self.client.post(
           self.recipe_url,
@@ -118,6 +119,13 @@ class TestViews(TestCase):
 
         self.assertEqual(response.status_code, 200)
         self.assertEqual(len(Comment.objects.all()), comment_count)
+        
+    def test_comment_deleting_without_login(self):
+        comment_count = len(Comment.objects.all())
+        response = self.client.get('/yorum-sil/1')
+
+        # nothing should change
+        self.assertEquals(comment_count, len(Comment.objects.all()))
 
     """ My Recipes View Tests"""
     def test_my_recipes_GET(self):

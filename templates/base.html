@@ -23,6 +23,8 @@
         {% block content %}{% endblock %}
     </main>
 
+    {% include 'components/footer.html' %}
+
     <!-- Scripts -->
 
     <!-- Boostrap Bundle -->
@@ -33,7 +35,5 @@
 
     <!-- Additional scripts -->
     {% block scripts %}{% endblock %}
-
-    {% include 'components/footer.html' %}
 </body>
 </html>
