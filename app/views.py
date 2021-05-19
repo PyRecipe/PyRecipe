@@ -92,7 +92,7 @@ def searchList(request):
     return render(request, 'search-list.html', {'user': request.user})
 
 # edit
-def edit(request):
+def edit(request,slug):
     return render(request, 'edit.html', {'user': request.user})
 
 # add
@@ -104,6 +104,17 @@ class MyRecipes(ListView):
     model = Recipe
     template_name = 'my_recipes.html' 
     
+
+def delete_recipe(request, slug):
+
+    recipe = Recipe.objects.get(slug=slug)
+
+    if request.user.pk is not None:
+       if recipe is not None:
+           recipe.delete()
+
+    return redirect(f'/tariflerim')
+
 # recipe
 def recipe(request, slug):
     try:

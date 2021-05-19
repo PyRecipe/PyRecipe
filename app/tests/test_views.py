@@ -30,6 +30,7 @@ class TestViews(TestCase):
         self.my_recipes_url = reverse('app:my_recipes')
         self.settings_url = reverse('app:settings')
         self.login_url = reverse('app:login')
+        self.delete_recipe_url = reverse('app:recipe_delete',args=['recipe2'])
 
     """ Recipe View Tests """
     def test_recipe_GET(self):
@@ -164,3 +165,19 @@ class TestViews(TestCase):
         ) 
 
         self.assertEquals(response.status_code, 302)
+
+    """ Recipe deleting test """
+    def test_recipe_deleting(self):
+
+        self.test_login_user_POST()
+        recipe = Recipe.objects.create(
+            slug = "recipe2",
+            title = "Ornek",
+            description= "Recipe Description",
+            author = 2
+        )
+
+        recipe_count = len(Recipe.objects.all())
+        response = self.client.get(self.delete_recipe_url)
+    
+        self.assertEquals(recipe_count, len(Recipe.objects.all()) + 1)

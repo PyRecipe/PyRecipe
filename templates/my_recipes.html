@@ -16,8 +16,9 @@
               <div class="card-body">
                 <h5 class="card-title">{{ recipe.title }}</h5>
                 <p class="card-text mb-2">{{ recipe.first_paragraph }}</p>
-                <a href="duzenle/{{ recipe.slug }}/" class="btn btn-success">Düzenle</a>
-                <a href="sil/{{ recipe.slug }}/" class="btn btn-success">Sil</a>
+                <!-- <a href="duzenle/{{ recipe.slug }}/" class="btn btn-success">Düzenle</a> -->
+                <a href="{% url 'app:edit' slug=recipe.slug %}" class="btn btn-success">Düzenle</a>
+                <a href="{% url 'app:recipe_delete' slug=recipe.slug %}" class="btn btn-success">Sil</a>
               </div>
             </div>
           </a>
