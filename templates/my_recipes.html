@@ -5,25 +5,25 @@
 <div class="container">
   <h2 class="text-center mt-4 mb-4">Tariflerim</h2>
   <div class="row justify-content-center">
-
     {% for recipe in object_list %}
-      <div class="col-3 mb-3 ms-4 me-4">
-        <a class="text-decoration-none text-dark" href="/tarif/{{ recipe.slug }}/">
-          <div class="card" style="width: 20rem;">
-            {% if recipe.images_arr %}
-            <img src="{{ request.host_url }}/static/{{ recipe.images_arr.0 }}" class="card-img-top rounded" style="height: 18em; width: 20em;" alt="...">
-            {% endif %}
-            <div class="card-body">
-              <h5 class="card-title">{{ recipe.title }}</h5>
-              <p class="card-text mb-2">{{ recipe.first_paragraph }}</p>
-              <a href="duzenle/{{ recipe.slug }}/" class="btn btn-success">Düzenle</a>
-              <a href="sil/{{ recipe.slug }}/" class="btn btn-success">Sil</a>
+      {% if recipe.author == user.pk %}
+        <div class="col-3 mb-3 ms-4 me-4">
+          <a class="text-decoration-none text-dark" href="/tarif/{{ recipe.slug }}/">
+            <div class="card" style="width: 20rem;">
+              {% if recipe.images_arr %}
+              <img src="{{ request.host_url }}/static/{{ recipe.images_arr.0 }}" class="card-img-top rounded" style="height: 18em; width: 20em;" alt="...">
+              {% endif %}
+              <div class="card-body">
+                <h5 class="card-title">{{ recipe.title }}</h5>
+                <p class="card-text mb-2">{{ recipe.first_paragraph }}</p>
+                <a href="duzenle/{{ recipe.slug }}/" class="btn btn-success">Düzenle</a>
+                <a href="sil/{{ recipe.slug }}/" class="btn btn-success">Sil</a>
+              </div>
             </div>
-          </div>
-        </a>
-      </div>
-  {% endfor %}
-  
+          </a>
+        </div>
+      {% endif %}
+    {% endfor %}
   </div>
 </div>
 
