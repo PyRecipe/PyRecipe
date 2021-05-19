@@ -1,9 +1,9 @@
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
-from django.views.generic import ListView
+from django.views.generic import ListView 
 from .forms import CommentForm, CreateUserForm, SearchForm, LoginForm, EditProfileForm
 from .models import Recipe, Comment 
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 
 # homepage
@@ -44,6 +44,11 @@ def userLogin(request):
         form = LoginForm()
 
     return render(request, 'login.html', {'form': form, 'user':request.user})
+
+# logout
+def logout_view(request):
+    logout(request)
+    return redirect('/')
 
 # register
 def register(request):    
