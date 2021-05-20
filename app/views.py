@@ -94,7 +94,7 @@ def searchList(request):
     return render(request, 'search-list.html', {'user': request.user})
 
 # edit
-def edit(request):
+def edit(request,slug):
     return render(request, 'edit.html', {'user': request.user})
 
 # add
@@ -105,6 +105,19 @@ def add(request):
 class MyRecipes(ListView):
     model = Recipe
     template_name = 'my_recipes.html' 
+
+    
+
+def delete_recipe(request, slug):
+
+    recipe = Recipe.objects.get(slug=slug)
+
+    if request.user.pk is not None:
+       if recipe is not None:
+           recipe.delete()
+
+    return redirect(f'/tariflerim')
+
 
 def delete_comment(request, comment_id):
     # get information about recipe and comment
@@ -119,6 +132,7 @@ def delete_comment(request, comment_id):
 
     # return previous page
     return redirect(f'/tarif/{recipe.slug}')
+
 
 # recipe
 def recipe(request, slug):
