@@ -30,6 +30,7 @@ class TestViews(TestCase):
         self.my_recipes_url = reverse('app:my_recipes')
         self.settings_url = reverse('app:settings')
         self.login_url = reverse('app:login')
+        self.add_url = reverse('app:add')
 
     """ Recipe View Tests """
     def test_recipe_GET(self):
@@ -128,6 +129,7 @@ class TestViews(TestCase):
 
     """ Settings Tests """
     def test_settings_GET(self):
+        self.test_login_user_POST()
         response = self.client.get(self.settings_url)
 
         self.assertEquals(response.status_code, 200)
@@ -162,5 +164,28 @@ class TestViews(TestCase):
                 'password' : "Aa9001900a1"
             }
         ) 
+
+        self.assertEquals(response.status_code, 302)
+
+
+    """ Add View Tests """
+    def test_add_GET(self):
+        response = self.client.get(self.add_url)
+        
+        self.assertEquals(response.status_code, 200)
+        self.assertTemplateUsed(response, 'add.html') 
+
+    def test_add_POST(self):
+        self.test_login_user_POST()
+        response = self.client.post(
+          self.add_url,
+          {
+              'title': "Test Tarif Adı",
+              'description': "Test Tarif Açıklaması",
+              'components': "Malzeme 1, Malzeme 2, Malzeme 3",
+              'state': 1,
+              'image': "/static/upload/image/default_recipe_image.jpg"
+          }
+        )
 
         self.assertEquals(response.status_code, 302)
