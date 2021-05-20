@@ -15,11 +15,11 @@ class Comment(models.Model):
     
 class Recipe(models.Model):
     slug = models.SlugField(max_length=100, blank=True, null=True)
-    title = models.CharField(max_length=100)
-    description = models.TextField(max_length=800, null=True, blank=True)
-    image = models.ImageField(upload_to='image/', null=True, blank=True)
-    components = models.TextField(max_length=500, null=True, blank=True)
-    state = models.IntegerField(default=1) # 0 => draft, 1 => public, 2 => private, 3 => deleted
+    title = models.CharField(max_length=100, verbose_name="")
+    description = models.TextField(max_length=800, null=True, blank=True, verbose_name="")
+    image = models.ImageField(upload_to='image/', null=True, blank=True, default='image/default_recipe_image.jpg', verbose_name="")
+    components = models.TextField(max_length=500, null=True, blank=True, verbose_name="")
+    state = models.IntegerField(default=1, verbose_name="") # 0 => draft, 1 => public, 2 => private, 3 => deleted
     author = models.IntegerField()
     category = models.CharField(max_length=50, null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
