@@ -21,6 +21,11 @@
                                     {% else %}
                                         <img style="width: 100%; height: 200px; object-fit: cover;" class="img-fluid rounded shadow" src="{{ request.host_url }}/static/recipe_image_1.jpg" />
                                     {% endif %} -->
+
+                                    <!-- recipe-image -->
+                                    <img src="{{ request.host_url }}/upload/{{ recipe.image }}" style="height: 280px; object-fit: cover; width: 100%;" class="img-fluid rounded">
+                                    <!-- /recipe-image -->
+                                       
                                     <h4 class="mt-2">{{ recipe.title }}</h4>
                                     <span>{{ recipe.author_info }}</span> 
                                 </a>

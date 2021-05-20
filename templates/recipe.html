@@ -19,10 +19,9 @@
             <!-- /recipe-date-->
         </div>
 
-        <!-- {% if recipe.images_arr %}
-            <img style="width: 100%; height: 500px; object-fit: cover;" class="rounded" src="{{ request.host_url }}/static/{{ recipe.images_arr.0 }}">
-        {% endif %} -->
-        <!-- /recipe-head-->
+        <!-- recipe-image -->
+        <img src="{{ request.host_url }}/upload/{{ recipe.image }}" style="width: 100%; height: 500px; object-fit: cover;" class="rounded">
+        <!-- /recipe-image -->
 
         <!-- recipe-elements-->
         <div class="mt-3">

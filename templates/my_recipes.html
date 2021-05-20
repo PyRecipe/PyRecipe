@@ -10,9 +10,11 @@
         <div class="col-3 mb-3 ms-4 me-4">
           <a class="text-decoration-none text-dark" href="/tarif/{{ recipe.slug }}/">
             <div class="card" style="width: 20rem;">
-              <!-- {% if recipe.images_arr %}
-              <img src="{{ request.host_url }}/static/{{ recipe.images_arr.0 }}" class="card-img-top rounded" style="height: 18em; width: 20em;" alt="...">
-              {% endif %} -->
+         
+              <!-- recipe-image -->
+              <img src="{{ request.host_url }}/upload/{{ recipe.image }}" style="height: 280px; object-fit: cover; width: 100%;" class="img-fluid rounded">
+              <!-- /recipe-image -->
+
               <div class="card-body">
                 <h5 class="card-title">{{ recipe.title }}</h5>
                 <p class="card-text mb-2">{{ recipe.first_paragraph }}</p>
