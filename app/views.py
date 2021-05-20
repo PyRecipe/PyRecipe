@@ -21,7 +21,7 @@ def settings(request):
             return redirect('/')
         
     else:
-        form = EditProfileForm()
+        form = EditProfileForm(instance=request.user)
         return render(request, 'settings.html', {'user': request.user, 'form': form})
 
 # login
@@ -99,20 +99,12 @@ def edit(request):
 # add
 def add(request):
     if request.method == "POST":
-        form = AddForm(request.POST)
-        
+        form = AddForm(request.POST, request.FILES)
+
         if form.is_valid():
-            state = form.cleaned_data['state']
-            print(state)
-            recipe = Recipe.objects.create(
-                title = form.cleaned_data['title'],
-                description = form.cleaned_data['description'],
-                components = form.cleaned_data['components'],
-                state = form.cleaned_data['state'],
-                author = request.user.pk,
-                image = form.cleaned_data['image']
-            )
-            return redirect(f'tarif/{recipe.slug}/')
+            form.instance.author = request.user.pk    
+            form.save()
+            return redirect('/tariflerim')
     else:
         form = AddForm()
     
