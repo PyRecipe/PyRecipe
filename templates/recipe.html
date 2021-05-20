@@ -67,14 +67,19 @@
 
                 {% for comment in comments %}
                 <!-- comment -->
-                <div class="row">
+                <div class="row my-4">
                     <div class="col text-start">
-                        <img class="mb-1" src="http://{{ request.get_host }}/static/user.svg">
-                        <label>{{ comment.author_info.first_name }} {{ comment.author_info.last_name }} • </label>
+                        <!-- <img class="mb-1" src="http://{{ request.get_host }}/static/user.svg"> -->
+                        {% if comment.author_info.first_name %}
+                            <label>{{ comment.author_info.first_name }} {{ comment.author_info.last_name }} • </label>
+                        {% endif %}
                         <label class="fst-italic">{{ comment.author_info.username }}</label>
                     </div>
 
                     <div class="col text-end">
+                        {% if comment.author_info.pk == user.pk %}
+                        <a href="/yorum-sil/{{ comment.pk }}" class="me-4">Yorumu Sil</a> 
+                        {% endif %}
                         <label class="fst-italic">{{ comment.created_at }}</label>
                     </div>
 

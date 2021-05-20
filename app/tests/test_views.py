@@ -30,6 +30,7 @@ class TestViews(TestCase):
         self.my_recipes_url = reverse('app:my_recipes')
         self.settings_url = reverse('app:settings')
         self.login_url = reverse('app:login')
+        self.delete_recipe_url = reverse('app:recipe_delete',args=['recipe2'])
         self.add_url = reverse('app:add')
 
     """ Recipe View Tests """
@@ -93,6 +94,7 @@ class TestViews(TestCase):
     
     """ Comment Tests """
     def test_create_comment(self):
+        self.test_login_user_POST();
         comment_count = len(Comment.objects.all())
         response = self.client.post(
           self.recipe_url,
@@ -118,6 +120,13 @@ class TestViews(TestCase):
 
         self.assertEqual(response.status_code, 200)
         self.assertEqual(len(Comment.objects.all()), comment_count)
+        
+    def test_comment_deleting_without_login(self):
+        comment_count = len(Comment.objects.all())
+        response = self.client.get('/yorum-sil/1')
+
+        # nothing should change
+        self.assertEquals(comment_count, len(Comment.objects.all()))
 
     """ My Recipes View Tests"""
     def test_my_recipes_GET(self):
@@ -168,7 +177,24 @@ class TestViews(TestCase):
         self.assertEquals(response.status_code, 302)
 
 
-    """ Add View Tests """
+    """ Recipe deleting test """
+    def test_recipe_deleting(self):
+
+        self.test_login_user_POST()
+        recipe = Recipe.objects.create(
+            slug = "recipe2",
+            title = "Ornek",
+            description= "Recipe Description",
+            author = 2
+        )
+
+        recipe_count = len(Recipe.objects.all())
+        response = self.client.get(self.delete_recipe_url)
+    
+        self.assertEquals(recipe_count, len(Recipe.objects.all()) + 1)
+
+      
+      """ Add View Tests """
     def test_add_GET(self):
         response = self.client.get(self.add_url)
         

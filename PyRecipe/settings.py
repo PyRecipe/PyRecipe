@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
+import django_heroku
 import os
 from pathlib import Path
 
@@ -26,7 +27,7 @@ SECRET_KEY = 'django-insecure-axl#@82fz5y&74!z7+2=nqu#7r&h_i2y_qht9v%!b6xi&drznj
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -136,3 +137,6 @@ MEDIA_URL = '/upload/'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Activate django_heroku
+django_heroku.settings(locals())
