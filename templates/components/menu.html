@@ -1,36 +1,41 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container my-4">
         <a class="navbar-brand" href="/">PyRecipe</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
+            aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
-        </button> 
+        </button>
         <div class="collapse navbar-collapse" id="navbarText">
             <form action="/ara" method="POST" class="m-auto w-50">
                 {% csrf_token %}
-                <input name="search" type="text" class="form-control" placeholder="Malzeme, Tarif veya Kullanıcı ara..." />
+                <input name="search" type="text" class="form-control"
+                    placeholder="Malzeme, Tarif veya Kullanıcı ara..." />
             </form>
             <ul class="navbar-nav mb-2 mb-lg-0">
                 {% if user.pk != None %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="/ekle"><img src="http://{{ request.get_host }}/static/plus.svg" /> Yeni</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/tariflerim">Tariflerim</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" id="navbarProfileDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" href="#"><img src="http://{{ request.get_host }}/static/user.svg" /></a>
-                        <ul class="dropdown-menu dropdown-menu-lg-end" aria-labelledby="navbarProfileDropdown">
-                            <li><a class="dropdown-item" href="/ayarlar">Ayarlar</a></li>
-                            <li><a class="dropdown-item" href="/cikis">Çıkış Yap</a></li>
-                        </ul>
-                    </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/ekle"><img src="http://{{ request.get_host }}/static/plus.svg" />
+                        Yeni</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/tariflerim">Tariflerim</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" id="navbarProfileDropdown" role="button"
+                        data-bs-toggle="dropdown" aria-expanded="false" href="#"><img
+                            src="http://{{ request.get_host }}/static/user.svg" /></a>
+                    <ul class="dropdown-menu dropdown-menu-lg-end" aria-labelledby="navbarProfileDropdown">
+                        <li><a class="dropdown-item" href="/ayarlar">Ayarlar</a></li>
+                        <li><a class="dropdown-item" href="/cikis">Çıkış Yap</a></li>
+                    </ul>
+                </li>
                 {% else %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="/giris">Giriş Yap</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/kayit">Kayıt Ol</a>
-                    </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/giris">Giriş Yap</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/kayit">Kayıt Ol</a>
+                </li>
                 {% endif %}
             </ul>
         </div>

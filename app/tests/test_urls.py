@@ -3,6 +3,7 @@ from django.urls import reverse, resolve
 
 import app.views as views
 
+
 class TestUrls(SimpleTestCase):
 
     def test_index_url_is_resolved(self):
@@ -36,7 +37,7 @@ class TestUrls(SimpleTestCase):
         self.assertEquals(resolve(url).func, views.searchList)
 
     def test_edit_url_is_resolved(self):
-        url = reverse('app:edit',args=['recipe'])
+        url = reverse('app:edit', args=['recipe'])
         self.assertEquals(resolve(url).func, views.edit)
 
     def test_add_url_is_resolved(self):

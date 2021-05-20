@@ -2,55 +2,55 @@
 
 {% block content %}
 
-    <!-- settings -->
-    <section class="my-5">
-        <div class="container">
+<!-- settings -->
+<section class="my-5">
+    <div class="container">
 
-            <div class="mx-auto w-50">
-                <h2>Ayarlar</h2>
-                <form class="mt-4" action="{% url 'app:settings' %}" method="POST" >
-                    {% csrf_token %}
-                    <!-- form-name -->
-                    <div class="row">
-                        <div class="col">
-                            <label class="mb-1">Ad</label>
-                            {{form.first_name}}
-                        </div>
-                        <div class="col">
-                            <label class="mb-1">Soyad</label>
-                            {{form.last_name}}
-                        </div>
+        <div class="mx-auto w-50">
+            <h2>Ayarlar</h2>
+            <form class="mt-4" action="{% url 'app:settings' %}" method="POST">
+                {% csrf_token %}
+                <!-- form-name -->
+                <div class="row">
+                    <div class="col">
+                        <label class="mb-1">Ad</label>
+                        {{form.first_name}}
                     </div>
-                    <!-- /form-name -->
-
-                    <!-- form-email -->
-                    <div class="mt-3">
-                        <label class="mb-1">E-posta</label>
-                        {{form.email}}
+                    <div class="col">
+                        <label class="mb-1">Soyad</label>
+                        {{form.last_name}}
                     </div>
-                    <!-- /form-email -->
+                </div>
+                <!-- /form-name -->
 
-                    <!-- form-password -->
-                    <!-- <div class="mt-3">
+                <!-- form-email -->
+                <div class="mt-3">
+                    <label class="mb-1">E-posta</label>
+                    {{form.email}}
+                </div>
+                <!-- /form-email -->
+
+                <!-- form-password -->
+                <!-- <div class="mt-3">
                         <label class="mb-1">Yeni Şifre</label>
                         <input type="password" class="form-control" placeholder="Şifre" aria-label="Şifre" />
                     </div> -->
-                    <!-- /form-password -->
+                <!-- /form-password -->
 
-                    <!-- form-password-repeat -->
-                    <!-- <div class="mt-3">
+                <!-- form-password-repeat -->
+                <!-- <div class="mt-3">
                         <label class="mb-1">Yeni Şifre Tekrarı</label>
                         <input type="password" class="form-control" placeholder="Şifre tekrarı" aria-label="Şifre tekrarı" />
                     </div> -->
-                    <!-- /form-password-repeat -->
+                <!-- /form-password-repeat -->
 
-                    <button class="btn btn-primary mt-4" type="submit">Kaydet</button>
+                <button class="btn btn-primary mt-4" type="submit">Kaydet</button>
 
-                </form>
-            </div>
+            </form>
         </div>
-    </section>
-    <!-- /settings -->
+    </div>
+</section>
+<!-- /settings -->
 
 {% endblock %}
 
@@ -59,12 +59,12 @@
 
 <script>
     var form_fields = document.getElementsByTagName('input')
-   
-    form_fields[3].placeholder = 'Ad';    
-    form_fields[4].placeholder = 'Soyad';
-    form_fields[5].placeholder = 'E-Posta'; 
 
-    for (var field in form_fields){
+    form_fields[3].placeholder = 'Ad';
+    form_fields[4].placeholder = 'Soyad';
+    form_fields[5].placeholder = 'E-Posta';
+
+    for (var field in form_fields) {
         form_fields[field].className += ' form-control'
     }
 
