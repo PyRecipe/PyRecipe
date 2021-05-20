@@ -2,41 +2,11 @@
 
 {% block content %}
 <section class="d-flex align-items-center justify-content-center container w-50 mb-5 mt-5">
-    <form action="{% url 'app:add' %}" method="POST">
+    <form action="{% url 'app:add' %}" method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         <h2 class="mb-4">Tarif Ekle</h2>
-
-        <!-- form-recipe-name -->
-        <div class="form-floating mb-3">
-            {{ form.title }}
-            <label class="ms-1 text-muted">Tarif Adı</label>
-        </div>
-        <!-- /form-recipe-name -->
+        {{ form.as_p }}
         
-        <!-- form-component -->
-        <div class="form-floating mb-4">
-            {{ form.components }}
-            <label class="text-muted">Malzemeler(Virgül ile ayırın)</label>
-        </div>  
-        <!-- /form-component -->
-
-        <!-- form-description-->
-        <div class="form-floating mb-4">
-            {{ form.description }}
-            <label class="text-muted">Yapılışı</label>
-        </div>
-        <!-- /form-description-->
-
-        <!-- form-images -->
-        <div class="mb-3">
-            {{ form.image }}
-        </div>
-        <!-- /form-images -->
-
-        <!-- form-draft -->
-        {{ form.state }}
-        <!-- /form-draft -->
-
         <!-- form-button -->
         <div class="mt-3">
             <button type="submit" class="btn btn-primary">Tarifi Ekle</button>
