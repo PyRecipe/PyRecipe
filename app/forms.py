@@ -2,6 +2,7 @@ from django.forms import ModelForm
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from django.contrib.auth.models import User
 from django import forms
+from .models import Recipe
 
 class CreateUserForm(UserCreationForm):
     class Meta:
@@ -34,25 +35,29 @@ class EditProfileForm(UserChangeForm):
             'email',
         )
 
-class AddForm(forms.Form):
-  title = forms.CharField(widget=forms.TextInput(attrs={
-    'class': 'form-control',
-    'placeholder': 'Tarif Adı'
-  }))
-  description = forms.CharField(widget=forms.Textarea(attrs={
-    'class': 'form-control',
-    'style' : 'height: 150px',
-    'placeholder': 'Yapılışı'
-  }))
-  components = forms.CharField(widget=forms.Textarea(attrs={
-    'class': 'form-control',
-    'style' : 'height: 100px',
-    'placeholder': 'Malzemeler'
-  }))
-  CHOICES=[('1','Herkese Açık'),
-         ('0','Gizli')]
-  state = forms.ChoiceField(choices=CHOICES, widget=forms.RadioSelect(attrs={
-    'class': 'list-unstyled'
-  }))
-  image = forms.ImageField()
-  
+class AddForm(forms.ModelForm):
+  class Meta:
+    model = Recipe
+    fields = ['title', 'description', 'components', 'state', 'image']
+    exclude = ['author']
+
+    CHOICES = [('1','Herkese Açık'),('0','Gizli')]
+    widgets = {
+      'title': forms.TextInput(attrs={
+        'class': 'form-control',
+        'placeholder': 'Tarif Adı'
+      }),
+      'description': forms.Textarea(attrs={
+        'class': 'form-control',
+        'style' : 'height: 150px',
+        'placeholder': 'Yapılışı'
+      }),
+      'components': forms.Textarea(attrs={
+        'class': 'form-control',
+        'style' : 'height: 100px',
+        'placeholder': 'Malzemeler'
+      }),
+      'state': forms.RadioSelect(choices=CHOICES, attrs={
+        'class': 'list-unstyled'
+      })
+    }
