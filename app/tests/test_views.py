@@ -194,7 +194,7 @@ class TestViews(TestCase):
         self.assertEquals(recipe_count, len(Recipe.objects.all()) + 1)
 
       
-      """ Add View Tests """
+    """ Add View Tests """
     def test_add_GET(self):
         response = self.client.get(self.add_url)
         
