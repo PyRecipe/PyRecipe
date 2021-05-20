@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-axl#@82fz5y&74!z7+2=nqu#7r&h_i2y_qht9v%!b6xi&drznj
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['https://pyrecipe.herokuapp.com']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
