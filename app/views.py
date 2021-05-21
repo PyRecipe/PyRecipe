@@ -1,7 +1,7 @@
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.views.generic import ListView
-from .forms import CommentForm, CreateUserForm, SearchForm, LoginForm, EditProfileForm, AddForm
+from .forms import CommentForm, CreateUserForm, SearchForm, LoginForm, EditProfileForm, AddForm, EditForm
 from .models import Recipe, Comment
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
@@ -114,7 +114,25 @@ def searchList(request):
 
 
 def edit(request, slug):
-    return render(request, 'edit.html', {'user': request.user})
+    recipe = Recipe.objects.get(slug=slug)
+    
+    if request.user.pk == recipe.author:
+        if request.method == "POST":
+            form = EditForm(request.POST, request.FILES,instance=recipe)
+            
+            if form.is_valid():
+                form.save()
+                return redirect('/tariflerim')
+                
+    
+        else:
+            form = EditForm(instance=recipe)
+    else:
+        form =  EditForm(instance=recipe)
+
+    return render(request, 'edit.html', {'user': request.user, 'form':form, 'recipe': recipe})
+
+    
 
 # add
 

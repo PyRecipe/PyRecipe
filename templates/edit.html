@@ -4,16 +4,18 @@
 <section class="d-flex align-items-center justify-content-center container w-50 mb-5 mt-5">
     <div>
         <h2 class="mb-4">Tarifi Düzenle</h2>
-        <form>
+        <form method="POST" action="{% url 'app:edit' slug=recipe.slug %}" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
             <!-- form-recipe-name -->
-            <div class="form-floating mb-3">
+            <!-- <div class="form-floating mb-3">
                 <input type="text" class="form-control" placeholder="Tarif Adı">
                 <label class="ms-1 text-muted">Tarif Adı</label>
-            </div>
+            </div> -->
             <!-- /form-recipe-name -->
 
             <!-- form-material -->
-            <label class="form-label mt-3">Malzemeler</label>
+            <!-- <label class="form-label mt-3">Malzemeler</label>
 
             <div class="row">
                 <div class="col">
@@ -23,9 +25,9 @@
                         <option value="e1-2">Two</option>
                         <option value="e1-3">Three</option>
                     </select>
-                </div>
+                </div> -->
 
-                <div class="col-3">
+                <!-- <div class="col-3">
                     <input type="text" class="form-control" placeholder="Miktar">
                 </div>
 
@@ -86,18 +88,18 @@
 
             <div class="text-center mb-4">
                 <button type="submit" class="w-25 btn btn-primary btn-sm"><img src="static/plus.svg"></button>
-            </div>
+            </div> -->
             <!-- /form-material -->
 
             <!-- form-comment-->
-            <div class="form-floating mb-4">
+            <!-- <div class="form-floating mb-4">
                 <textarea type="text" style="height: 150px" class="form-control" placeholder="Yapılışı"></textarea>
                 <label class="text-muted">Yapılışı</label>
-            </div>
+            </div> -->
             <!-- /form-comment-->
 
             <!-- form-images -->
-            <div class="row">
+            <!-- <div class="row">
                 <div class="col">
                     <img style="height: 12em;" class="rounded"
                         src="https://images.unsplash.com/photo-1484723091739-30a097e8f929?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=687&q=80">
@@ -127,19 +129,19 @@
                 <input type="file" class="form-control" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04"
                     aria-label="Upload">
                 <button class="btn btn-primary" type="button" id="inputGroupFileAddon04">Yükle</button>
-            </div>
+            </div> -->
             <!-- /form-images -->
 
             <!-- form-draft -->
-            <div class="form-check form-switch mt-4">
+            <!-- <div class="form-check form-switch mt-4">
                 <input class="form-check-input" type="checkbox">
                 <label class="form-check-label">Herkese Açık</label>
-            </div>
+            </div> -->
             <!-- /form-draft -->
 
             <!-- form-button -->
             <div class="mt-3">
-                <button type="button" class="btn btn-primary">Tarifi Güncelle</button>
+                <button type="submit" class="btn btn-primary">Tarifi Güncelle</button>
             </div>
             <!-- /form-button -->
         </form>
