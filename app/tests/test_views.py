@@ -32,6 +32,7 @@ class TestViews(TestCase):
         self.login_url = reverse('app:login')
         self.delete_recipe_url = reverse('app:recipe_delete', args=['recipe2'])
         self.add_url = reverse('app:add')
+        self.edit_url = reverse('app:edit', args=['recipe'])
 
     """ Recipe View Tests """
 
@@ -178,7 +179,6 @@ class TestViews(TestCase):
                 'password': "Aa9001900a1"
             }
         )
-
         self.assertEquals(response.status_code, 302)
 
     """ Recipe deleting test """
@@ -219,4 +219,27 @@ class TestViews(TestCase):
             }
         )
 
+        self.assertEquals(response.status_code, 302)
+
+
+    def test_edit_GET(self):
+        self.test_login_user_POST() # because of login is required
+        response = self.client.get(self.edit_url)
+
+        self.assertEquals(response.status_code,200)
+        self.assertTemplateUsed(response, 'edit.html')
+
+    def test_edit_POST(self):
+        self.test_login_user_POST() # because of login is required
+        response = self.client.post(
+            self.edit_url,
+            {
+                'title': "Düzenlenen Tarif Adı",
+                'description': "Düzenleme Tarif Açıklaması",
+                'components': "Malzeme 3, Malzeme 2, Malzeme 1",
+                'state': 0,
+                'image': "/static/upload/image/default_recipe_image.jpg"
+            }
+        )
+       
         self.assertEquals(response.status_code, 302)

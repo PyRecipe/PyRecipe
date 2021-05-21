@@ -68,3 +68,30 @@ class AddForm(forms.ModelForm):
                 'class': 'list-unstyled'
             })
         }
+
+
+class EditForm(forms.ModelForm):
+    class Meta:
+        model = Recipe
+        fields = ['title', 'description', 'components', 'state', 'image']
+
+        CHOICES = [('1', 'Herkese Açık'), ('0', 'Gizli')]
+        widgets = {
+            'title': forms.TextInput(attrs={
+                'class': 'form-control shadow',
+                'placeholder': 'Tarif Adı'
+            }),
+            'description': forms.Textarea(attrs={
+                'class': 'form-control shadow',
+                'style': 'height: 150px',
+                'placeholder': 'Yapılışı'
+            }),
+            'components': forms.Textarea(attrs={
+                'class': 'form-control shadow',
+                'style': 'height: 100px',
+                'placeholder': 'Malzemeler'
+            }),
+            'state': forms.RadioSelect(choices=CHOICES, attrs={
+                'class': 'list-unstyled'
+            })
+        }
