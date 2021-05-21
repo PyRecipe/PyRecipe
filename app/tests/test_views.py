@@ -3,7 +3,6 @@ from django.urls import reverse
 from django.contrib.auth.models import User
 from app.models import Recipe, Comment
 
-
 class TestViews(TestCase):
     def setUp(self):
         """Test setUp"""
@@ -25,8 +24,7 @@ class TestViews(TestCase):
         User.objects.create_user(**self.user1_credentials)
 
         self.recipe_url = reverse('app:recipe', args=['recipe'])
-        self.recipe_undefined_url = reverse(
-            'app:recipe', args=['this-recipe-not-exists'])
+        self.recipe_undefined_url = reverse('app:recipe', args=['this-recipe-not-exists'])
         self.search_url = reverse('app:search')
         self.register_url = reverse('app:register')
         self.my_recipes_url = reverse('app:my_recipes')
