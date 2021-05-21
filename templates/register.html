@@ -1,66 +1,66 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <section style="height: 68vh;" class="d-flex align-items-center justify-content-center container">
-        <div>
-            <h2 class="mb-4">Kayıt Ol</h2>
-            <form action="{% url 'app:register' %}" method="POST" >
-                {% csrf_token %}
-                <!-- form-name -->
-                <div class="row mb-3">
-                    <div class="col form-floating">
-                        {{form.first_name}}
-                        <label class="ms-3">Ad</label>
-                    </div>
-                    <div class="col form-floating">
-                        {{form.last_name}}
-                        <label class="ms-3">Soyad</label>
-                    </div>
+<section style="height: 68vh;" class="d-flex align-items-center justify-content-center container">
+    <div>
+        <h2 class="mb-4">Kayıt Ol</h2>
+        <form action="{% url 'app:register' %}" method="POST">
+            {% csrf_token %}
+            <!-- form-name -->
+            <div class="row mb-3">
+                <div class="col form-floating">
+                    {{form.first_name}}
+                    <label class="ms-3">Ad</label>
                 </div>
-                <!-- /form-name -->
-
-                <!-- form-username -->
-                <div class="form-floating mb-3">
-                    {{form.username}}
-                    <label class="ms-1">Kullanıcı Adı</label>
+                <div class="col form-floating">
+                    {{form.last_name}}
+                    <label class="ms-3">Soyad</label>
                 </div>
-                <!-- /form-username -->
+            </div>
+            <!-- /form-name -->
 
-                <!-- form-email -->
-                <div class="form-floating mb-3">
-                    {{form.email}}
-                    <label class="ms-1">E-posta</label>
+            <!-- form-username -->
+            <div class="form-floating mb-3">
+                {{form.username}}
+                <label class="ms-1">Kullanıcı Adı</label>
+            </div>
+            <!-- /form-username -->
+
+            <!-- form-email -->
+            <div class="form-floating mb-3">
+                {{form.email}}
+                <label class="ms-1">E-posta</label>
+            </div>
+            <!-- /form-email -->
+
+            <!-- form-password -->
+            <div class="row mb-3">
+                <div class="col form-floating">
+                    {{form.password1}}
+                    <label class="ms-3">Şifre</label>
                 </div>
-                <!-- /form-email -->
-
-                <!-- form-password -->
-                <div class="row mb-3">
-                    <div class="col form-floating">
-                        {{form.password1}}
-                        <label class="ms-3">Şifre</label>
-                    </div>
-                    <div class="col form-floating">
-                        {{form.password2}}
-                        <label class="ms-3">Şifreyi Onayla</label>
-                    </div>
+                <div class="col form-floating">
+                    {{form.password2}}
+                    <label class="ms-3">Şifreyi Onayla</label>
                 </div>
-                <!-- /form-password -->
+            </div>
+            <!-- /form-password -->
 
-                <!-- form-policy -->
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="">
-                    <label class="form-check-label"><a href="/policy">Kullanım şartları</a>nı kabul ediyorum.</label>
-                </div>
-                <!-- /form-policy -->
+            <!-- form-policy -->
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="">
+                <label class="form-check-label"><a href="/policy">Kullanım şartları</a>nı kabul ediyorum.</label>
+            </div>
+            <!-- /form-policy -->
 
-                <!-- form-button -->
-                <div class="text-start mt-3">
-                    <button type="submit" class="btn btn-primary">Kayıt Ol</button>
-                </div> 
-                <!-- /form-button -->
-            </form>
-        </div>
-    </section>
+            <!-- form-button -->
+            <div class="text-start mt-3">
+                <button type="submit" class="btn btn-primary">Kayıt Ol</button>
+            </div>
+            <!-- /form-button -->
+        </form>
+    </div>
+</section>
 
 
 {% endblock %}
@@ -78,7 +78,7 @@
     form_fields[6].placeholder = 'Şifreyi Onayla';
 
 
-    for (var field in form_fields){
+    for (var field in form_fields) {
         form_fields[field].className += ' form-control'
     }
 

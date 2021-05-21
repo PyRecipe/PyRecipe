@@ -10,7 +10,6 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
-import django_heroku
 import os
 from pathlib import Path
 
@@ -130,10 +129,15 @@ STATICFILES_DIRS = (
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
+MEDIA_ROOT = os.path.join(BASE_DIR, 'static/upload')
+MEDIA_URL = '/upload/'
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Activate django_heroku
-django_heroku.settings(locals())
+if '/app' in os.environ['HOME']:
+    import django_heroku
+    django_heroku.settings(locals())

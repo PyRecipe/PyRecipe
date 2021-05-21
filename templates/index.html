@@ -2,57 +2,63 @@
 
 {% block content %}
 
-    <!-- welcome-hero -->
-    {% include 'components/welcome-hero.html' %}
-    <!-- /welcome-hero -->
+<!-- welcome-hero -->
+{% include 'components/welcome-hero.html' %}
+<!-- /welcome-hero -->
 
-    <!-- newly-added -->
-    <section class="my-5">
-        <div class="container">
-            <h3>En Son Eklenenler</h3>
-            <div class="splide">
-                <div class="splide__track">
-                    <ul class="splide__list">
-                        {% for recipe in latest_recipes %}
-                            <li class="splide__slide">
-                                <a href="/tarif/{{ recipe.slug }}" class="text-decoration-none text-dark">
-                                    {% if recipe.images_arr %}
+<!-- newly-added -->
+<section class="my-5">
+    <div class="container">
+        <h3>En Son Eklenenler</h3>
+        <div class="splide">
+            <div class="splide__track">
+                <ul class="splide__list">
+                    {% for recipe in latest_recipes %}
+                    <li class="splide__slide">
+                        <a href="/tarif/{{ recipe.slug }}" class="text-decoration-none text-dark">
+                            <!-- {% if recipe.images_arr %}
                                         <img style="width: 100%; height: 200px; object-fit: cover;" class="img-fluid rounded shadow" src="{{ request.host_url }}/static/{{ recipe.images_arr.0 }}" />
                                     {% else %}
                                         <img style="width: 100%; height: 200px; object-fit: cover;" class="img-fluid rounded shadow" src="{{ request.host_url }}/static/recipe_image_1.jpg" />
-                                    {% endif %}
-                                    <h4 class="mt-2">{{ recipe.title }}</h4>
-                                    <span>{{ recipe.author_info }}</span> 
-                                </a>
-                            </li>
-                        {% endfor %}
-                    </ul>
-                </div>
+                                    {% endif %} -->
+
+                            <!-- recipe-image -->
+                            <img src="{{ request.host_url }}/upload/{{ recipe.image }}"
+                                style="height: 280px; object-fit: cover; width: 100%;" class="img-fluid rounded">
+                            <!-- /recipe-image -->
+
+                            <h4 class="mt-2">{{ recipe.title }}</h4>
+                            <span>{{ recipe.author_info }}</span>
+                        </a>
+                    </li>
+                    {% endfor %}
+                </ul>
             </div>
-    </section>
-    <!-- /newly-added -->
+        </div>
+</section>
+<!-- /newly-added -->
 {% endblock %}
 
 {% block scripts %}
-    <script>
-        document.addEventListener( 'DOMContentLoaded', function () {
-            new Splide( '.splide', {
-                type   : 'loop',
-                perPage: 4,
-                perMove: 1,
-                gap    : '10px',
-                breakpoints: {
-                    990: {
-                        perPage: 3,
-                    },
-                    800: {
-                        perPage: 2,
-                    },
-                    500: {
-                        perPage: 1,
-                    }
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        new Splide('.splide', {
+            type: 'loop',
+            perPage: 4,
+            perMove: 1,
+            gap: '10px',
+            breakpoints: {
+                990: {
+                    perPage: 3,
+                },
+                800: {
+                    perPage: 2,
+                },
+                500: {
+                    perPage: 1,
                 }
-            } ).mount();
-        } );
-    </script>
+            }
+        }).mount();
+    });
+</script>
 {% endblock %}
