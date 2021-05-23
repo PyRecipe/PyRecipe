@@ -10,7 +10,7 @@
         <!-- search-results -->
         <div class="row">
             {% for result in results %}
-
+            {% if result.state == 1 or result.author == user.pk %}
             <!-- search-result -->
             <div class="col-lg-4">
                 <a href="/tarif/{{ result.slug }}" class="text-dark text-decoration-none d-block my-2">
@@ -32,7 +32,7 @@
                 </a>
             </div>
             <!-- /search-result -->
-
+            {% endif %}
             {% endfor %}
         </div>
         <!-- /search-results -->
