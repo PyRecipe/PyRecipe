@@ -4,79 +4,90 @@ from django.views.generic import ListView
 from .forms import CommentForm, CreateUserForm, SearchForm, LoginForm, EditProfileForm, AddForm, EditForm
 from .models import Recipe, Comment
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
 
+
+
 # homepage
-
-
 def index(request):
     # get latest 10 recipes
     latest_recipes = Recipe.objects.all()[:10]
     return render(request, 'index.html', {'user': request.user, 'latest_recipes': latest_recipes})
 
+
 # settings
-
-
+@login_required()
 def settings(request):
     if request.method == 'POST':
         form = EditProfileForm(request.POST, instance=request.user)
         if form.is_valid():
             form.save()
-            return redirect('/')
-
+            messages.info(
+                    request, 'Ayarlar Güncellendi.')
     else:
         form = EditProfileForm(instance=request.user)
-        return render(request, 'settings.html', {'user': request.user, 'form': form})
+        
+    return render(request, 'settings.html', {'user': request.user, 'form': form})
+
 
 # login
-
-
 def userLogin(request):
-    if request.method == "POST":
-        form = LoginForm(request.POST)
-        if form.is_valid():
-            username = form.cleaned_data['username']
-            password = form.cleaned_data['password']
-            user = authenticate(request, username=username, password=password)
+    if not request.user.is_authenticated:
+        if request.method == "POST":
+            form = LoginForm(request.POST)
+            if form.is_valid():
+                username = form.cleaned_data['username']
+                password = form.cleaned_data['password']
+                user = authenticate(request, username=username, password=password)
 
-            if user is not None:
-                if user.is_active:
-                    login(request, user)
-                    return redirect('/')
+                if user is not None:
+                    if user.is_active:
+                        login(request, user)
+                        return redirect('/')
+                    else:
+                        messages.info(request, 'Hesap Devre Dışı')
                 else:
-                    messages.info(request, 'Hesap Devre Dışı')
-            else:
-                messages.info(
-                    request, 'Kullanıcı adı ve şifrenizi kontrol edin.')
-    else:
-        form = LoginForm()
+                    messages.info(
+                        request, 'Kullanıcı adı ve şifrenizi kontrol edin.')
+        else:
+            form = LoginForm()
 
-    return render(request, 'login.html', {'form': form, 'user': request.user})
+        return render(request, 'login.html', {'form': form, 'user': request.user})
+    else:
+        return redirect('/')
+
 
 # logout
-
-
+@login_required()
 def logout_view(request):
     logout(request)
     return redirect('/')
 
+
 # register
-
-
 def register(request):
-    if request.method == 'POST':
-        user = CreateUserForm(request.POST)
-        if user.is_valid():
-            user.save()
-            return redirect('/giris')
-    else:
-        user = CreateUserForm()
+    if not request.user.is_authenticated:
+        if request.method == 'POST':
+            user = CreateUserForm(request.POST)
+            if user.is_valid():
+                user.save()
+                messages.info(
+                        request, 'Hesap oluşturuldu. Giriş yapabilirsin.')
+                return redirect('/giris')
+            else:
+                    messages.info(
+                        request, 'Girdiğiniz bilgileri kontrol edin.')
+        else:
+            user = CreateUserForm()
 
-    return render(request, 'register.html', {'form': user, 'user': request.user})
+        return render(request, 'register.html', {'form': user, 'user': request.user})
+    else:
+        return redirect('/')
+
 
 # search
-
-
 def search(request):
     if request.method == 'GET':
         return render(request, 'search.html')
@@ -104,39 +115,35 @@ def search(request):
         else:
             return redirect('/')
 
+
 # search-list
-
-
 def searchList(request):
     return render(request, 'search-list.html', {'user': request.user})
 
+
 # edit
-
-
+@login_required()
 def edit(request, slug):
     recipe = Recipe.objects.get(slug=slug)
-    
+
     if request.user.pk == recipe.author:
         if request.method == "POST":
-            form = EditForm(request.POST, request.FILES,instance=recipe)
-            
+            form = EditForm(request.POST, request.FILES, instance=recipe)
+
             if form.is_valid():
                 form.save()
                 return redirect('/tariflerim')
-                
-    
+
         else:
             form = EditForm(instance=recipe)
     else:
-        form =  EditForm(instance=recipe)
+        form = EditForm(instance=recipe)
 
-    return render(request, 'edit.html', {'user': request.user, 'form':form, 'recipe': recipe})
+    return render(request, 'edit.html', {'user': request.user, 'form': form, 'recipe': recipe})
 
-    
 
 # add
-
-
+@login_required()
 def add(request):
     if request.method == "POST":
         form = AddForm(request.POST, request.FILES)
@@ -147,17 +154,17 @@ def add(request):
             return redirect('/tariflerim')
     else:
         form = AddForm()
-
     return render(request, 'add.html', {'form': form, 'user': request.user})
+    
 
 # my_recipes
-
-
-class MyRecipes(ListView):
+class MyRecipes(LoginRequiredMixin, ListView):
     model = Recipe
     template_name = 'my_recipes.html'
 
 
+# delete_recipe
+@login_required()
 def delete_recipe(request, slug):
 
     recipe = Recipe.objects.get(slug=slug)
@@ -169,6 +176,8 @@ def delete_recipe(request, slug):
     return redirect(f'/tariflerim')
 
 
+# delete_comment
+@login_required()
 def delete_comment(request, comment_id):
     # get information about recipe and comment
     comment = Comment.objects.get(pk=comment_id)
@@ -189,19 +198,21 @@ def recipe(request, slug):
     try:
         recipe = Recipe.objects.get(slug=slug)
         comments = Comment.objects.filter(recipe_id=recipe.pk)
+        if recipe.state == 1 or recipe.author == request.user.pk:
+            if request.method == 'POST':
+                form = CommentForm(request.POST)
+                if form.is_valid():
+                    # after auth user id should be dynamicly pasted
+                    Comment.objects.create(
+                        recipe_id=form.cleaned_data['recipe_id'],
+                        user_id=request.user.pk,
+                        comment=form.cleaned_data['comment']
+                    )
+            else:
+                form = CommentForm()
 
-        if request.method == 'POST':
-            form = CommentForm(request.POST)
-            if form.is_valid():
-                # after auth user id should be dynamicly pasted
-                Comment.objects.create(
-                    recipe_id=form.cleaned_data['recipe_id'],
-                    user_id=request.user.pk,
-                    comment=form.cleaned_data['comment']
-                )
+            return render(request, 'recipe.html', {'recipe': recipe, 'comments': comments, 'form': form})
         else:
-            form = CommentForm()
-
-        return render(request, 'recipe.html', {'recipe': recipe, 'comments': comments, 'form': form})
+            return redirect('/')
     except Recipe.DoesNotExist:
         return redirect('/')

@@ -3,6 +3,7 @@ from django.urls import reverse
 from django.contrib.auth.models import User
 from app.models import Recipe, Comment
 
+
 class TestViews(TestCase):
     def setUp(self):
         """Test setUp"""
@@ -24,7 +25,8 @@ class TestViews(TestCase):
         User.objects.create_user(**self.user1_credentials)
 
         self.recipe_url = reverse('app:recipe', args=['recipe'])
-        self.recipe_undefined_url = reverse('app:recipe', args=['this-recipe-not-exists'])
+        self.recipe_undefined_url = reverse(
+            'app:recipe', args=['this-recipe-not-exists'])
         self.search_url = reverse('app:search')
         self.register_url = reverse('app:register')
         self.my_recipes_url = reverse('app:my_recipes')
@@ -34,8 +36,8 @@ class TestViews(TestCase):
         self.add_url = reverse('app:add')
         self.edit_url = reverse('app:edit', args=['recipe'])
 
-    """ Recipe View Tests """
 
+    """ Recipe Tests """
     def test_recipe_GET(self):
         response = self.client.get(self.recipe_url)
 
@@ -48,8 +50,8 @@ class TestViews(TestCase):
         # redirect to homepage
         self.assertEquals(response.status_code, 302)
 
-    """ Recipe Search Tests """
 
+    """ Recipe Search Tests """
     def test_search_POST(self):
         response = self.client.post(
             self.search_url,
@@ -72,8 +74,8 @@ class TestViews(TestCase):
         # redirect to homepage
         self.assertEquals(response.status_code, 302)
 
-    """ Register Tests """
 
+    """ Register Tests """
     def test_register_GET(self):
         response = self.client.get(self.register_url)
         self.assertEqual(response.status_code, 200)
@@ -96,8 +98,8 @@ class TestViews(TestCase):
         self.assertEqual(response.status_code, 302)
         self.assertEqual(len(User.objects.all()), amount_of_user + 1)
 
-    """ Comment Tests """
 
+    """ Comment Tests """
     def test_create_comment(self):
         self.test_login_user_POST()
         comment_count = len(Comment.objects.all())
@@ -133,22 +135,32 @@ class TestViews(TestCase):
         # nothing should change
         self.assertEquals(comment_count, len(Comment.objects.all()))
 
-    """ My Recipes View Tests"""
 
-    def test_my_recipes_GET(self):
+    """ My Recipes Tests"""
+    def test_my_recipes_GET_with_login(self):
+        self.test_login_user_POST()
         response = self.client.get(self.my_recipes_url)
 
         self.assertEquals(response.status_code, 200)
         self.assertTemplateUsed(response, 'my_recipes.html')
+    
+    def test_my_recipes_GET_without_login(self):
+        response = self.client.get(self.my_recipes_url)
+
+        self.assertEquals(response.status_code, 302)
 
     """ Settings Tests """
-
-    def test_settings_GET(self):
+    def test_settings_GET_with_login(self):
         self.test_login_user_POST()
         response = self.client.get(self.settings_url)
 
         self.assertEquals(response.status_code, 200)
         self.assertTemplateUsed(response, 'settings.html')
+
+    def test_settings_GET_without_login(self):
+        response = self.client.get(self.settings_url)
+
+        self.assertEquals(response.status_code, 302)
 
     def test_settings_POST(self):
         self.test_login_user_POST()  # because of login is required
@@ -161,10 +173,11 @@ class TestViews(TestCase):
             }
         )
 
-        self.assertEquals(response.status_code, 302)
+        self.assertEquals(response.status_code, 200)
+        self.assertTemplateUsed(response, 'settings.html')
 
-    """ Login View Tests """
 
+    """ Login Tests """
     def test_login_GET(self):
         response = self.client.get(self.login_url)
 
@@ -181,8 +194,8 @@ class TestViews(TestCase):
         )
         self.assertEquals(response.status_code, 302)
 
-    """ Recipe deleting test """
 
+    """ Recipe Deleting Test """
     def test_recipe_deleting(self):
 
         self.test_login_user_POST()
@@ -198,13 +211,19 @@ class TestViews(TestCase):
 
         self.assertEquals(recipe_count, len(Recipe.objects.all()) + 1)
 
-    """ Add View Tests """
 
-    def test_add_GET(self):
+    """ Add Tests """
+    def test_add_GET_with_login(self):
+        self.test_login_user_POST()
         response = self.client.get(self.add_url)
 
         self.assertEquals(response.status_code, 200)
         self.assertTemplateUsed(response, 'add.html')
+
+    def test_add_GET_without_login(self):
+        response = self.client.get(self.add_url)
+
+        self.assertEquals(response.status_code, 302)
 
     def test_add_POST(self):
         self.test_login_user_POST()
@@ -222,15 +241,16 @@ class TestViews(TestCase):
         self.assertEquals(response.status_code, 302)
 
 
+    """ Edit Tests """
     def test_edit_GET(self):
-        self.test_login_user_POST() # because of login is required
+        self.test_login_user_POST()  # because of login is required
         response = self.client.get(self.edit_url)
 
-        self.assertEquals(response.status_code,200)
+        self.assertEquals(response.status_code, 200)
         self.assertTemplateUsed(response, 'edit.html')
 
     def test_edit_POST(self):
-        self.test_login_user_POST() # because of login is required
+        self.test_login_user_POST()  # because of login is required
         response = self.client.post(
             self.edit_url,
             {
@@ -241,5 +261,5 @@ class TestViews(TestCase):
                 'image': "/static/upload/image/default_recipe_image.jpg"
             }
         )
-       
+
         self.assertEquals(response.status_code, 302)
