@@ -10,6 +10,14 @@
             <h2>Ayarlar</h2>
             <form class="mt-4" action="{% url 'app:settings' %}" method="POST">
                 {% csrf_token %}
+
+                {% if messages %}
+                {% for message in messages %}
+                <div class="alert alert-{{ message.tags }}">
+                    {{ message }}
+                </div>
+                {% endfor %}
+                {% endif %}
                 <!-- form-name -->
                 <div class="row">
                     <div class="col">
