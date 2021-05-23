@@ -3,11 +3,12 @@
 {% block content %}
 
 <div class="container">
+  {% if object_list|length != 0 %}
   <h2 class="text-center mt-4 mb-4">Tariflerim</h2>
   <div class="row justify-content-center">
     {% for recipe in object_list %}
     {% if recipe.author == user.pk %}
-    <div class="col-3 mb-3 ms-4 me-4">
+    <div class="col-3 mb-3 mx-auto">
       <a class="text-decoration-none text-dark" href="/tarif/{{ recipe.slug }}/">
         <div class="card" style="width: 20rem;">
 
@@ -19,7 +20,6 @@
           <div class="card-body">
             <h5 class="card-title">{{ recipe.title }}</h5>
             <p class="card-text mb-2">{{ recipe.first_paragraph }}</p>
-            <!-- <a href="duzenle/{{ recipe.slug }}/" class="btn btn-success">Düzenle</a> -->
             <a href="{% url 'app:edit' slug=recipe.slug %}" class="btn btn-success">Düzenle</a>
             <a href="{% url 'app:recipe_delete' slug=recipe.slug %}" class="btn btn-success">Sil</a>
           </div>
@@ -29,6 +29,14 @@
     {% endif %}
     {% endfor %}
   </div>
+  {% else %}
+  <section style="height: 40vh;" class="d-flex align-items-center ">
+    <div class="text-center mt-4 mx-auto">
+      <h2 class="text-muted">Hiç tarifin yok. Hadi ilk tarifini ekleyelim...</h2>
+      <a type="button" href="/ekle" class="btn btn-primary w-25 mt-2">İlk Tarifini Ekle</a>
+    </div>
+  </section>
+  {% endif %}
 </div>
 
 {% endblock %}
