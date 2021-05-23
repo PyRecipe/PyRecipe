@@ -24,8 +24,8 @@ class LoginForm(forms.Form):
 
 
 class CommentForm(forms.Form):
-    recipe_id = forms.CharField(max_length=100)
-    comment = forms.CharField(widget=forms.Textarea)
+    recipe_id = forms.CharField(max_length=30)
+    comment = forms.CharField(max_length=500, widget=forms.Textarea)
 
 
 class SearchForm(forms.Form):
@@ -78,16 +78,16 @@ class EditForm(forms.ModelForm):
         CHOICES = [('1', 'Herkese Açık'), ('0', 'Gizli')]
         widgets = {
             'title': forms.TextInput(attrs={
-                'class': 'form-control shadow',
+                'class': 'form-control',
                 'placeholder': 'Tarif Adı'
             }),
             'description': forms.Textarea(attrs={
-                'class': 'form-control shadow',
+                'class': 'form-control',
                 'style': 'height: 150px',
                 'placeholder': 'Yapılışı'
             }),
             'components': forms.Textarea(attrs={
-                'class': 'form-control shadow',
+                'class': 'form-control',
                 'style': 'height: 100px',
                 'placeholder': 'Malzemeler'
             }),
