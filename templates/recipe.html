@@ -111,7 +111,11 @@
                 <textarea name="comment" type="text" style="height: 100px" class="form-control"
                     placeholder="Tarif hakkında fikriniz, yorumunuzu paylaşın."></textarea>
             </div>
-            <button type="submit" class="d-block mt-2 btn btn-primary btn-sm">Paylaş</button>
+            {% if user.is_authenticated %}
+                <button type="submit" class="d-block mt-2 btn btn-primary btn-sm">Paylaş</button>
+            {% else %}
+                <a type="button" href="/giris?next=/tarif/{{ recipe.slug }}/" class="mt-2 btn btn-primary btn-sm">Yorum yapmak için giriş yap</a>
+            {% endif %}
         </form>
         <!-- /form-comment -->
     </div>
