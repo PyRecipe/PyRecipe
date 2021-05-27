@@ -8,14 +8,11 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
 
-
-
 # homepage
 def index(request):
     # get latest 10 recipes
     latest_recipes = Recipe.objects.all()[:10]
     return render(request, 'index.html', {'user': request.user, 'latest_recipes': latest_recipes})
-
 
 # settings
 @login_required()
@@ -30,7 +27,6 @@ def settings(request):
         form = EditProfileForm(instance=request.user)
         
     return render(request, 'settings.html', {'user': request.user, 'form': form})
-
 
 # login
 def userLogin(request):
@@ -58,13 +54,11 @@ def userLogin(request):
     else:
         return redirect('/')
 
-
 # logout
 @login_required()
 def logout_view(request):
     logout(request)
     return redirect('/')
-
 
 # register
 def register(request):
@@ -85,7 +79,6 @@ def register(request):
         return render(request, 'register.html', {'form': user, 'user': request.user})
     else:
         return redirect('/')
-
 
 # search
 def search(request):
@@ -115,11 +108,9 @@ def search(request):
         else:
             return redirect('/')
 
-
 # search-list
 def searchList(request):
     return render(request, 'search-list.html', {'user': request.user})
-
 
 # edit
 @login_required()
@@ -141,7 +132,6 @@ def edit(request, slug):
 
     return render(request, 'edit.html', {'user': request.user, 'form': form, 'recipe': recipe})
 
-
 # add
 @login_required()
 def add(request):
@@ -155,13 +145,11 @@ def add(request):
     else:
         form = AddForm()
     return render(request, 'add.html', {'form': form, 'user': request.user})
-    
 
 # my_recipes
 class MyRecipes(LoginRequiredMixin, ListView):
     model = Recipe
     template_name = 'my_recipes.html'
-
 
 # delete_recipe
 @login_required()
@@ -174,7 +162,6 @@ def delete_recipe(request, slug):
             recipe.delete()
 
     return redirect(f'/tariflerim')
-
 
 # delete_comment
 @login_required()
@@ -191,7 +178,6 @@ def delete_comment(request, comment_id):
 
     # return previous page
     return redirect(f'/tarif/{recipe.slug}')
-
 
 # recipe
 def recipe(request, slug):
