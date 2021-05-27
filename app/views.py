@@ -103,7 +103,7 @@ def search(request):
                         results.append(recipe)
             else:
                 # user is searching with recipe name
-                results = Recipe.objects.filter(title__contains=search)
+                results = Recipe.objects.filter(title__icontains=search.lower())
             return render(request, 'search-list.html', {'query': search, 'results': results, 'user': request.user})
         else:
             return redirect('/')
